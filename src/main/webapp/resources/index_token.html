@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+    	<title>360training | Dashboard</title>
+
+      	<link rel="stylesheet" type="text/css" href="resources/assets/plugins/bootstrap-3.3.6/css/bootstrap.min.css" />
+      	<link rel="stylesheet" type="text/css" href="resources/assets/css/dashboard.css" />
+      	<link rel="shortcut icon" href="favicon.ico" />
+     
+      	<script type="text/javascript" src="resources/assets/plugins/modernizr.js"></script>
+  	</head>
+	<body>
+	    <a href="#" id="get-data">Get JSON data</a>
+    	<div id="show-data"></div>
+   		<div id="dashboard"></div>
+	</body>
+	
+	<script type="text/javascript" src="resources/assets/scripts/jquery-3.0.0.js"></script>
+	
+	<script>
+	
+		$(document).ready(function () {
+			
+		    $('#get-data').click(function () {
+		        var showData = $('#show-data');
+				var pathName = location.pathname;
+				var tokenUrl = pathName + "token/get";
+				$.getJSON(
+					tokenUrl, 
+					{
+				        userName: "admin",
+				        password: "admin123"
+				    },
+					function (data) {
+				   
+				    	console.log(data);
+				    
+				    	var output = '';
+				    	for (property in data) {
+				        	output += property + ': ' + data[property]+"; <br>\n";
+				    	}
+				    
+				    	//var accessToken = data.accessToken;
+				    	//var tokenType = data.tokenType;
+				    
+				    	showData.empty();
+				    	showData.append(output);   
+					}
+			    );	
+			});   
+		});
+	
+	</script> 	
+	
+	<!--  <script src="resources/assets/scripts/bundle.js"></script> -->
+</html>
