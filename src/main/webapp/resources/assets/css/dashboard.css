@@ -9,8 +9,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  display: table;
-  vertical-align: middle;
+	width: 100%;
 }
 
 body {
@@ -135,7 +134,8 @@ body {
 	padding: 15px;
 	overflow: hidden;
 	background-color: #333333;
-	border-right: 1px solid #eee;
+	border-right: 1px solid #BAC2C7;
+	box-shadow: 0px 0px 10px rgba(96,105,114,0.5);
 }
 .sidebar button[data-toggle="collapse"]::after{
 	content:"+";
@@ -405,10 +405,10 @@ body {
 .left-toggle .sidebar{
 	width: 0;
 	padding-left: 25px;
-    padding-right: 25px;
+  padding-right: 25px;
 }
 .left-toggle .main{
-	left: 40px;
+	left: 50px;
 }
 
 
@@ -426,10 +426,24 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.statistics{
+	display: table;
+	width: 100%;
+}
+.statistics-col:first-child .placeholder{
+	margin-left: 0 !important;
+}
+.statistics-col:last-child .placeholder{
+	margin-right: 0 !important;
+}
+.statistics-col{
+	display: table-cell;
+	vertical-align: bottom;
+}
 .main .statistics .placeholder{
 	background-color: #eee;
-    margin: 10px 0;
-    padding: 10px;
+  margin: 10px 5px;
+  padding: 10px;
 	text-align: center;
 	font-family: "Open Sans";
 	color:#0280d4;
@@ -447,6 +461,24 @@ body {
 {
 	.navbar-fixed-top ul.menu .user-detail a>div{
 		width: 420px;
+	}
+
+	.iso-container .iso-header .filters button{
+		padding: 10px 5px !important;
+	}
+}
+
+@media only screen and (max-width: 860px)
+{
+	.iso-container .iso-header .merge-filter-sorting{
+		display: block !important;
+	}
+	.iso-container .iso-header .search{
+		width: 100% !important;
+	}
+	.iso-container .iso-header .filters,
+	.iso-container .iso-header .sorting{
+		display: none !important;
 	}
 }
 
