@@ -35350,8 +35350,7 @@
 
 	  return {
 	    type: _types.CHANGE_AUTH,
-	    payload: token,
-	    login: isLogin
+	    payload: token
 	  };
 	}
 
@@ -36950,25 +36949,28 @@
 	    _this.state = {
 	      "userName": "",
 	      "pass": "",
-	      "waiting": false
+	      "waiting": false,
+	      "valid": true
 	    };
 	    return _this;
 	  }
 
 	  _createClass(Login, [{
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      if (this.props.auth != false && this.props.auth != "Error: Network Error" && this.props.auth != "") {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (typeof nextProps.auth.errors == "undefined") {
+	        this.setState({ "valid": true });
 	        this.context.router.push("/LS360Dashboard/courses");
 	      } else {
-	        //this.setState({"waiting": false});
-	        //console.log(this.state.waiting);
+	        this.setState({ "valid": false });
+	        this.setState({ "waiting": false });
 	      }
 	    }
 	  }, {
 	    key: 'onChange',
 	    value: function onChange(event) {
 	      this.setState(_defineProperty({}, event.target.name, event.target.value));
+	      this.setState({ "valid": true });
 	    }
 	  }, {
 	    key: 'onSubmit',
@@ -37003,13 +37005,22 @@
 	              { className: 'form-body' },
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'form-group' },
-	                _react2.default.createElement('input', { type: 'text', name: 'userName', placeholder: 'Username', className: 'form-control', value: this.state.userName, onChange: this.onChange.bind(this) })
+	                { className: "form-group " + (!this.state.valid ? " has-error" : " hide") },
+	                _react2.default.createElement(
+	                  'label',
+	                  { className: 'control-label' },
+	                  'Invalid Username / password'
+	                )
 	              ),
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'form-group' },
-	                _react2.default.createElement('input', { type: 'password', name: 'pass', placeholder: 'Password', className: 'form-control', value: this.state.pass, onChange: this.onChange.bind(this) })
+	                { className: "form-group " + (!this.state.valid ? " has-error" : "") },
+	                _react2.default.createElement('input', { disabled: this.state.waiting, type: 'text', name: 'userName', placeholder: 'Username', className: 'form-control', value: this.state.userName, onChange: this.onChange.bind(this) })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: "form-group " + (!this.state.valid ? " has-error" : "") },
+	                _react2.default.createElement('input', { disabled: this.state.waiting, type: 'password', name: 'pass', placeholder: 'Password', className: 'form-control', value: this.state.pass, onChange: this.onChange.bind(this) })
 	              ),
 	              _react2.default.createElement(
 	                'div',
@@ -37020,7 +37031,7 @@
 	                  _react2.default.createElement(
 	                    'label',
 	                    null,
-	                    _react2.default.createElement('input', { type: 'checkbox', className: 'form-chkbox' }),
+	                    _react2.default.createElement('input', { disabled: this.state.waiting, type: 'checkbox', className: 'form-chkbox' }),
 	                    ' Remember me.'
 	                  )
 	                ),
@@ -37029,10 +37040,12 @@
 	                  { className: 'pull-right' },
 	                  _react2.default.createElement(
 	                    'button',
-	                    { className: 'btn blue', onClick: function onClick() {
+	                    {
+	                      className: "btn btn-primary" + (this.state.waiting ? " disabled" : ""),
+	                      disabled: this.state.waiting, onClick: function onClick() {
 	                        return _this2.onSubmit();
 	                      } },
-	                    'Log in'
+	                    !this.state.waiting ? "Log in" : "Logging..."
 	                  )
 	                )
 	              )
@@ -37136,6 +37149,8 @@
 	      this.props.authentication(false);
 	      this.props.clearState("COURSE_COUNTERS");
 	      this.props.clearState("FETCH_BRAND");
+	      sessionStorage.removeItem("auth");
+	      sessionStorage.removeItem("userName");
 	      this.context.router.push("/LS360Dashboard/login");
 	    }
 	  }, {
@@ -37932,10 +37947,14 @@
 	      switch (data.courseType) {
 	        case "Online Course":
 	          if (data.courseStatus == "completed") {
+	            var sDate = data.completionDate;
+	            sDate = sDate.split("T");
+	            sDate = String(sDate[0]).split("-");
+	            sDate = sDate[1] + "/" + sDate[2] + "/" + sDate[0];
 	            return _react2.default.createElement(
 	              'div',
 	              { className: 'iso-status' },
-	              "Completed " + data.completionDate
+	              "Completed " + sDate
 	            );
 	          }
 	          return;
@@ -38772,23 +38791,19 @@
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 	exports.default = function () {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	  var action = arguments[1];
 
 
 	  switch (action.type) {
 	    case _types.CHANGE_AUTH:
 	      if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
-	        if (action.login) {
-	          if (typeof action.payload.status != "undefined") {
-	            sessionStorage.removeItem("auth");
-	            return false;
-	          } else {
-	            sessionStorage.setItem("auth", action.payload);
-	          }
+	        if (typeof action.payload.errors == "undefined") {
+	          //console.log(1);
+	          sessionStorage.setItem("auth", action.payload);
 	        } else {
+	          //console.log(2);
 	          sessionStorage.removeItem("auth");
-	          sessionStorage.removeItem("userName");
 	        }
 	      }
 	      return action.payload;
@@ -38884,7 +38899,7 @@
 	        dispatch(_extends({}, action, { payload: response.data }));
 	      }).catch(function (response) {
 	        //const newAction = {...action, payload:response}
-	        dispatch(_extends({}, action, { payload: response }));
+	        dispatch(_extends({}, action, { payload: response.data }));
 	      });
 	    };
 	  };
