@@ -38762,13 +38762,13 @@
 	      if (path == "" || path == "null" || path == null) {
 	        switch (data.courseType) {
 	          case "Online Course":
-	            path = "../assets/img/default-online.jpg";
+	            path = "resources/assets/img/default-online.jpg";
 	            break;
 	          case "Classroom Course":
-	            path = "../assets/img/default-classroom.jpg";
+	            path = "resources/assets/img/default-classroom.jpg";
 	            break;
 	          case "Webinar Course":
-	            path = "../assets/img/default-webinar.jpg";
+	            path = "resources/assets/img/default-webinar.jpg";
 	            break;
 	        }
 	      }
