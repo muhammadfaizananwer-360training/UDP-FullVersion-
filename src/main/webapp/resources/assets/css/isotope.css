@@ -49,9 +49,9 @@
 	font-family: 'Glyphicons Halflings';
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	top: 28px;
+	top: 38px;
   color: #eee;
-  right: 2px;
+  right: 10px;
   font-size: 18px;
   z-index: 1020;
 }
@@ -71,7 +71,7 @@
 .iso-container .iso-header .merge-filter-sorting .dropdown-toggle{
 	background-color: #4d4d4d;
   border: none;
-	padding: 10px;
+	padding: 14px;
 }
 .iso-container .iso-header .sorting .dropdown-toggle::before,
 .iso-container .iso-header .merge-filter-sorting .dropdown-toggle::before{
@@ -94,7 +94,7 @@
 	background-color: #4d4d4d;
   color: #fff;
 	margin:0;
-	padding:10px 14px;
+	padding:14px;
 	border:none;
 	outline:none;
 }
@@ -129,14 +129,17 @@
   background-size: cover;
 	background-color: #eee;
 }
+.iso-container .iso-item.single:nth-child(odd) .front .iso-title{
+	color: #0280d4;
+}
 .iso-container .iso-item.single .front .iso-title{
 	word-wrap: break-word;
-	color: #0280d4;
   line-height: 21px;
 	padding: 15px;
   text-transform: capitalize;
   height: 84px;
 	cursor: default;
+	color: #606972;
 }
 .iso-container .iso-item.single .front .iso-date-time{
 	color: #0280d4;
