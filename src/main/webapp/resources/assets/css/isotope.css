@@ -7,6 +7,47 @@
 	margin-top: 50px;
 }
 
+.iso-main-btn{
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	width: 100%;
+	height: 110px;
+}
+
+.iso-main-btn::before{
+	content: "";
+	background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+	padding: 17px;
+  left: 4px;
+  right: 0;
+  top: 25%;
+  z-index: 1;
+  margin-top: 6px;
+}
+
+.iso-main-btn::after{
+	content: "";
+  position: absolute;
+	padding: 21px;
+	left: 78px;
+	top: 25%;
+  border: 2px solid #E0E0E0;
+  background-color: #FFFFFF;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+  border-radius: 50%;
+}
+
+.iso-main-btn.expired::before{
+	background-image:url("../img/icons/exclamation.svg");
+}
+
 .iso-container .iso-header{
 	background-color: #4d4d4d;
   display: table;
@@ -32,7 +73,6 @@
 }
 .iso-container .iso-header .dropdown-menu-right a{
 	font-family: "Open Sans";
-  color: #606972;
   font-weight: 400;
   min-height: 30px;
   font-size: 13px;
@@ -139,7 +179,6 @@
   text-transform: capitalize;
   height: 84px;
 	cursor: default;
-	color: #606972;
 }
 .iso-container .iso-item.single .front .iso-date-time{
 	color: #0280d4;
@@ -147,7 +186,7 @@
 	font-weight: 400;
 	line-height: 14px;
 	text-align: left;
-	padding: 5px 15px;
+	padding: 0 30px 0 15px;
 }
 .iso-container .iso-item.single .front .iso-progress-bar{
 	height: 3px;
