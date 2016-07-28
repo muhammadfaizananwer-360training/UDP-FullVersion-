@@ -35651,6 +35651,130 @@
 	exports.default = (0, _reactRedux.connect)(mapState, actions)(App);
 
 /***/ },
+<<<<<<< HEAD
+=======
+/* 557 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(482);
+
+	var _reactRedux = __webpack_require__(456);
+
+	var _actions = __webpack_require__(558);
+
+	var actions = _interopRequireWildcard(_actions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Header = function (_Component) {
+	  _inherits(Header, _Component);
+
+	  function Header() {
+	    _classCallCheck(this, Header);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Header).apply(this, arguments));
+	  }
+
+	  _createClass(Header, [{
+	    key: 'menu',
+	    value: function menu(data, i) {
+	      if (data.label == 'MENU_DIVIDER') {
+	        return _react2.default.createElement('li', { key: i, className: 'divider' });
+	      } else {
+	        return _react2.default.createElement(
+	          'li',
+	          { key: i },
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: "/LS360Dashboard/" + data.type, activeClassName: 'active' },
+	            data.label
+	          )
+	        );
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      var logoUrl = { backgroundImage: 'url("' + this.props.data.logo.source + '")' };
+	      return _react2.default.createElement(
+	        'nav',
+	        { className: 'navbar-fixed-top' },
+	        _react2.default.createElement(_reactRouter.Link, { className: 'brand', to: this.props.data.logo.url, title: this.props.data.logo.label }),
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'menu' },
+	          _react2.default.createElement(
+	            'li',
+	            { className: 'user-detail' },
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'username' },
+	                this.props.data.user.firstName
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                null,
+	                this.props.data.user.email
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            { className: this.props.config.isOpen ? 'open' : '' },
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'dropdown-toggle', type: 'button', onClick: function onClick() {
+	                  return _this2.props.topMenuToggle(!_this2.props.config.isOpen);
+	                } },
+	              _react2.default.createElement('span', { className: 'glyphicon glyphicon-menu-down' })
+	            ),
+	            _react2.default.createElement(
+	              'ul',
+	              { className: 'dropdown-menu dropdown-menu-right' },
+	              this.props.data.menu.map(this.menu, this)
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Header;
+	}(_react.Component);
+
+	function mapState(state) {
+	  return {};
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapState, actions)(Header);
+
+/***/ },
+>>>>>>> a78d046bc6e9d311ece96e9a2ac5ea921666245e
 /* 558 */
 /***/ function(module, exports, __webpack_require__) {
 
