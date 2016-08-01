@@ -35191,6 +35191,7 @@
 
 	  switch (action.type) {
 	    case _types.FETCH_BRAND:
+	      //console.log(action.payload);
 	      return action.payload;
 	  }
 	  return state;
@@ -35261,10 +35262,10 @@
 
 	  switch (action.type) {
 	    case _types.LEFT_MENU:
-	      if ((typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) && typeof localStorage.leftMenu == "undefined") {
-	        localStorage.setItem("leftMenu", JSON.stringify(action.payload));
+	      if ((typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) && typeof sessionStorage.leftMenu == "undefined") {
+	        sessionStorage.setItem("leftMenu", JSON.stringify(action.payload));
 	      } else {
-	        localStorage.leftMenu = JSON.stringify(action.payload);
+	        sessionStorage.leftMenu = JSON.stringify(action.payload);
 	      }
 	      return action.payload;
 	  }
@@ -35320,8 +35321,8 @@
 	  switch (action.type) {
 	    case _types.CHANGE_AUTH:
 	      if (typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) {
+	        //console.log(action.payload);
 	        if (typeof action.payload.errors == "undefined") {
-	          //console.log(1);
 	          sessionStorage.setItem("auth", action.payload);
 	        } else {
 	          //console.log(2);
@@ -35580,28 +35581,29 @@
 	var App = function (_Component) {
 	  _inherits(App, _Component);
 
-	  function App(props) {
+	  function App() {
 	    _classCallCheck(this, App);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
-
-	    if (typeof _this.props.auth != "undefined") {
-	      _this.props.fetchBrand();
-	      _this.props.topMenuToggle(false);
-	      if ((typeof Storage === 'undefined' ? 'undefined' : _typeof(Storage)) && typeof localStorage.leftMenu != "undefined") {
-	        var obj = JSON.parse(localStorage.leftMenu);
-	        _this.props.leftMenuToggle(obj.isOpen, obj.activeAccType, obj.activeType);
-	      } else {
-	        _this.props.leftMenuToggle(true);
-	      }
-	    }
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(App).apply(this, arguments));
 	  }
 
 	  _createClass(App, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      if (typeof this.props.auth != "undefined") {
+	        this.props.fetchBrand();
+	        this.props.topMenuToggle(false);
+	        if ((typeof Storage === 'undefined' ? 'undefined' : _typeof(Storage)) && typeof sessionStorage.leftMenu != "undefined") {
+	          var obj = JSON.parse(sessionStorage.leftMenu);
+	          this.props.leftMenuToggle(obj.isOpen, obj.activeAccType, obj.activeType);
+	        } else {
+	          this.props.leftMenuToggle(true);
+	        }
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-
 	      if (typeof this.props.branding.logo != 'undefined') {
 	        return _react2.default.createElement(
 	          'div',
@@ -35641,11 +35643,7 @@
 	}(_react.Component);
 
 	function mapState(state) {
-	  return {
-	    "branding": state.branding,
-	    "topMenu": state.topMenu,
-	    "leftMenu": state.leftMenu
-	  };
+	  return { "branding": state.branding, "topMenu": state.topMenu, "leftMenu": state.leftMenu };
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapState, actions)(App);
@@ -35724,6 +35722,48 @@
 	  var request = _axios2.default.post(server + "/LS360ApiGateway/services/rest/brand", JSON.stringify({
 	    "username": sessionStorage.userName
 	  }), config);
+
+	  var request2 = {
+	    logo: {
+	      label: "360training",
+	      source: "../assets/img/logo.svg",
+	      url: "/LS360Dashboard"
+	    },
+	    userData: {
+	      userName: "Username",
+	      email: "username@email.com",
+	      firstName: "firstName",
+	      lastName: "lastName"
+	    },
+	    topMenu: {
+	      child: [{ label: "Account Information", type: "account-info", url: "#" }, { label: "Address Book", type: "address-book", url: "#" }, { label: "My Orders", type: "orders", url: "#" }, { label: "Billing & Subscription", type: "billing", url: "#" }, { label: "Support", type: "support", url: "#" }, { label: "MENU_DIVIDER", type: "menu_divider", url: "#" }, { label: "Terms Of Use", type: "terms", url: "#" }, { label: "Privacy Policy", type: "privacy-policy", url: "#" }, { label: "MENU_DIVIDER", type: "menu_divider", url: "#" }, { label: "Sign Out", type: "sign-out", url: "#" }]
+	    },
+	    leftMenu: {
+	      label: "Dashboard",
+	      child: [{
+	        label: "Learn",
+	        type: "learn",
+	        url: "#",
+	        child: [{ label: "My Courses", type: "courses", url: "#" }, { label: "My Subscriptions", type: "subscriptions", url: "#" }]
+	      }, {
+	        label: "Author",
+	        type: "author",
+	        url: "#",
+	        child: [{ label: "Create & Manage Courses", type: "create-course", url: "#" }, { label: "Course Reports", type: "course-report", url: "#" }]
+	      }, {
+	        label: "Manage",
+	        type: "manage",
+	        url: "#",
+	        child: [{ label: "Manage Users", type: "manage-users", url: "#" }, { label: "Enroll Users", type: "enroll-users", url: "#" }, { label: "Run Reports", type: "run-report", url: "#" }]
+	      }, {
+	        label: "Resources",
+	        type: "resources",
+	        url: "#",
+	        child: [{ label: "Shop Courses", type: "shop", url: "#" }, { label: "Browse Free Courses", type: "browse-free-courses", url: "#" }, { label: "Support Forum", type: "support", url: "#" }]
+	      }]
+	    },
+	    serverCurrentDate: "2016-07-21"
+	  };
 
 	  return {
 	    type: _types.FETCH_BRAND,
@@ -35818,6 +35858,237 @@
 	    "userName": sessionStorage.userName
 	  }), config);
 
+	  //const request = [];
+
+	  var request2 = [{ "courseSubType": "Self Paced Course",
+	    "startDate": "2016-07-28T23:59:59",
+	    "viewAssessmentURI": "#",
+	    "enrollmentId": 123456,
+	    "expiryDate": "2016-08-10T23:59:59",
+	    "certificateURI": "#",
+	    "timeSpent": "1H 24M",
+	    "courseImage": "",
+	    "isSubscriptionEnrollment": false,
+	    "isExpired": false,
+	    "courseGUID": "2a8cacb1b6e3455caf8ca9e9d19ce9ee",
+	    "courseProgress": 10,
+	    "courseStatus": "inprogress",
+	    "launchURI": "#",
+	    "subscriptionTag": "#",
+	    "courseType": "Online Course",
+	    "completionDate": "2016-06-28T23:59:59",
+	    "courseName": "Designing HP SMB Storage Solutions Rev 15.21 - 00729763 Designing HP SMB Storage Solutions Rev 15.21 - 00729763"
+	  }, {
+	    "courseSubType": "",
+	    "startDate": "2016-06-30T23:59:59",
+	    "viewAssessmentURI": "#",
+	    "enrollmentId": 123457,
+	    "expiryDate": "2016-06-30T23:59:59",
+	    "certificateURI": "#",
+	    "timeSpent": "1H 13M",
+	    "courseImage": "http://www.360training.com/wcsstore/Megasite/images/360training/healthcare/avoiding-falls-in-LTC-th.jpg",
+	    "isSubscriptionEnrollment": false,
+	    "isExpired": false,
+	    "courseGUID": "5b0a7cfec05b4329b0ed8dd3741dee21",
+	    "courseProgress": 0,
+	    "courseStatus": "inprogress",
+	    "launchURI": "#",
+	    "subscriptionTag": "#",
+	    "courseType": "Classroom Course",
+	    "completionDate": "2016-06-28T23:59:59",
+	    "courseName": "courseProgress 0 First Responder Awareness Level 1 -> ALL"
+	  }, {
+	    "courseSubType": "",
+	    "startDate": "2016-06-30T23:59:59",
+	    "viewAssessmentURI": "#",
+	    "enrollmentId": 123457,
+	    "expiryDate": "2016-06-30T23:59:59",
+	    "certificateURI": "#",
+	    "timeSpent": "1H 13M",
+	    "courseImage": "http://www.360training.com/wcsstore/Megasite/images/360training/healthcare/avoiding-falls-in-LTC-th.jpg",
+	    "isSubscriptionEnrollment": false,
+	    "isExpired": false,
+	    "courseGUID": "5b0a7cfec05b4329b0ed8dd3741dee21",
+	    "courseProgress": 0,
+	    "courseStatus": "inprogress",
+	    "launchURI": "#",
+	    "subscriptionTag": "#",
+	    "courseType": "Webinar Course",
+	    "completionDate": "2016-06-28T23:59:59",
+	    "courseName": "courseProgress 0 Webinar First Responder Awareness Level 1 -> ALL"
+	  }, {
+	    "courseSubType": "",
+	    "startDate": "2016-06-30T23:59:59",
+	    "viewAssessmentURI": "#",
+	    "enrollmentId": 123457,
+	    "expiryDate": "2016-06-30T23:59:59",
+	    "certificateURI": "#",
+	    "timeSpent": "1H 13M",
+	    "courseImage": "http://www.360training.com/wcsstore/Megasite/images/360training/healthcare/avoiding-falls-in-LTC-th.jpg",
+	    "isSubscriptionEnrollment": false,
+	    "isExpired": false,
+	    "courseGUID": "5b0a7cfec05b4329b0ed8dd3741dee21",
+	    "courseProgress": 0,
+	    "courseStatus": "inprogress",
+	    "launchURI": "#",
+	    "subscriptionTag": "#",
+	    "courseType": "Classroom Course",
+	    "completionDate": "2016-06-28T23:59:59",
+	    "courseName": "Classroom First Responder Awareness Level 1 -> ALL"
+	  }, {
+	    "courseSubType": "",
+	    "startDate": "2016-06-30T02:49:35.77",
+	    "viewAssessmentURI": "#",
+	    "enrollmentId": 123457,
+	    "expiryDate": "2016-06-30T02:49:35.77",
+	    "certificateURI": "#",
+	    "timeSpent": "1H 13M",
+	    "courseImage": "http://www.360training.com/wcsstore/Megasite/images/360training/healthcare/avoiding-falls-in-LTC-th.jpg",
+	    "isSubscriptionEnrollment": false,
+	    "isExpired": false,
+	    "courseGUID": "5b0a7cfec05b4329b0ed8dd3741dee21",
+	    "courseProgress": 0,
+	    "courseStatus": "inprogress",
+	    "launchURI": "#",
+	    "subscriptionTag": "#",
+	    "courseType": "Classroom Course",
+	    "completionDate": "2016-06-28T02:49:35.77",
+	    "courseName": "First Responder Awareness Level 1 -> ALL"
+	  }, {
+	    "courseSubType": "",
+	    "startDate": "2016-06-30T02:49:35.77",
+	    "viewAssessmentURI": "#",
+	    "enrollmentId": 123457,
+	    "expiryDate": "2016-06-30T02:49:35.77",
+	    "certificateURI": "#",
+	    "timeSpent": "1H 13M",
+	    "courseImage": "http://www.360training.com/wcsstore/Megasite/images/360training/healthcare/avoiding-falls-in-LTC-th.jpg",
+	    "isSubscriptionEnrollment": false,
+	    "isExpired": false,
+	    "courseGUID": "5b0a7cfec05b4329b0ed8dd3741dee21",
+	    "courseProgress": 0,
+	    "courseStatus": "inprogress",
+	    "launchURI": "#",
+	    "subscriptionTag": "#",
+	    "courseType": "Classroom Course",
+	    "completionDate": "2016-06-28T02:49:35.77",
+	    "courseName": "First Responder Awareness Level 1 -> ALL"
+	  }, {
+	    "courseSubType": "",
+	    "startDate": "2016-06-30T02:49:35.77",
+	    "viewAssessmentURI": "#",
+	    "enrollmentId": 123457,
+	    "expiryDate": "2016-06-30T02:49:35.77",
+	    "certificateURI": "#",
+	    "timeSpent": "1H 13M",
+	    "courseImage": "http://www.360training.com/wcsstore/Megasite/images/360training/healthcare/avoiding-falls-in-LTC-th.jpg",
+	    "isSubscriptionEnrollment": false,
+	    "isExpired": false,
+	    "courseGUID": "5b0a7cfec05b4329b0ed8dd3741dee21",
+	    "courseProgress": 0,
+	    "courseStatus": "inprogress",
+	    "launchURI": "#",
+	    "subscriptionTag": "#",
+	    "courseType": "Classroom Course",
+	    "completionDate": "2016-06-28T02:49:35.77",
+	    "courseName": "First Responder Awareness Level 1 -> ALL"
+	  }, {
+	    "courseSubType": "",
+	    "startDate": "2016-06-30T02:49:35.77",
+	    "viewAssessmentURI": "#",
+	    "enrollmentId": 123457,
+	    "expiryDate": "2016-06-30T02:49:35.77",
+	    "certificateURI": "#",
+	    "timeSpent": "1H 13M",
+	    "courseImage": "http://www.360training.com/wcsstore/Megasite/images/360training/healthcare/avoiding-falls-in-LTC-th.jpg",
+	    "isSubscriptionEnrollment": false,
+	    "isExpired": false,
+	    "courseGUID": "5b0a7cfec05b4329b0ed8dd3741dee21",
+	    "courseProgress": 0,
+	    "courseStatus": "inprogress",
+	    "launchURI": "#",
+	    "subscriptionTag": "#",
+	    "courseType": "Classroom Course",
+	    "completionDate": "2016-06-28T02:49:35.77",
+	    "courseName": "First Responder Awareness Level 1 -> ALL"
+	  }, {
+	    "courseSubType": "Self Paced Course",
+	    "startDate": "2016-06-28T02:49:35.77",
+	    "viewAssessmentURI": "#",
+	    "enrollmentId": 123456,
+	    "expiryDate": "2016-06-28T02:49:35.77",
+	    "certificateURI": "#",
+	    "timeSpent": "1H 24M",
+	    "courseImage": "http://www.360training.com/wcsstore/Megasite/images/360training/healthcare/avoiding-falls-in-LTC-th.jpg",
+	    "isSubscriptionEnrollment": false,
+	    "isExpired": true,
+	    "courseGUID": "2a8cacb1b6e3455caf8ca9e9d19ce9ee",
+	    "courseProgress": 56,
+	    "courseStatus": "inprogress",
+	    "launchURI": "#",
+	    "subscriptionTag": "#",
+	    "courseType": "Online Course",
+	    "completionDate": "2016-06-28T02:49:35.77",
+	    "courseName": "Anti-Money Laundering"
+	  }, {
+	    "courseSubType": "Self Paced Course",
+	    "startDate": "2016-06-28T02:49:35.77",
+	    "viewAssessmentURI": "#",
+	    "enrollmentId": 123456,
+	    "expiryDate": "2016-06-28T02:49:35.77",
+	    "certificateURI": "#",
+	    "timeSpent": "1H 24M",
+	    "courseImage": "http://www.360training.com/wcsstore/Megasite/images/360training/healthcare/avoiding-falls-in-LTC-th.jpg",
+	    "isSubscriptionEnrollment": false,
+	    "isExpired": true,
+	    "courseGUID": "2a8cacb1b6e3455caf8ca9e9d19ce9ee",
+	    "courseProgress": 100,
+	    "courseStatus": "completed",
+	    "launchURI": "#",
+	    "subscriptionTag": "#",
+	    "courseType": "Online Course",
+	    "completionDate": "2016-06-28T02:49:35.77",
+	    "courseName": "CourseStatus (completed) Anti-Money Laundering"
+	  }, {
+	    "courseSubType": "Self Paced Course",
+	    "startDate": "2016-06-28T02:49:35.77",
+	    "viewAssessmentURI": "#",
+	    "enrollmentId": 123456,
+	    "expiryDate": "2016-06-28T02:49:35.77",
+	    "certificateURI": "#",
+	    "timeSpent": "1H 24M",
+	    "courseImage": "http://www.360training.com/wcsstore/Megasite/images/360training/healthcare/avoiding-falls-in-LTC-th.jpg",
+	    "isSubscriptionEnrollment": false,
+	    "isExpired": false,
+	    "courseGUID": "2a8cacb1b6e3455caf8ca9e9d19ce9ee",
+	    "courseProgress": 56,
+	    "courseStatus": "notstarted",
+	    "launchURI": "#",
+	    "subscriptionTag": "#",
+	    "courseType": "Classroom Course",
+	    "completionDate": "2016-06-28T02:49:35.77",
+	    "courseName": "isExpired=false courseStatus(notstarted) Anti-Money Laundering"
+	  }, {
+	    "courseSubType": "Self Paced Course",
+	    "startDate": "2016-06-28T02:49:35.77",
+	    "viewAssessmentURI": "#",
+	    "enrollmentId": 123456,
+	    "expiryDate": "2016-06-28T02:49:35.77",
+	    "certificateURI": "#",
+	    "timeSpent": "1H 24M",
+	    "courseImage": "http://www.360training.com/wcsstore/Megasite/images/360training/healthcare/avoiding-falls-in-LTC-th.jpg",
+	    "isSubscriptionEnrollment": false,
+	    "isExpired": true,
+	    "courseGUID": "2a8cacb1b6e3455caf8ca9e9d19ce9ee",
+	    "courseProgress": 56,
+	    "courseStatus": "inprogress",
+	    "launchURI": "#",
+	    "subscriptionTag": "#",
+	    "courseType": "Online Course",
+	    "completionDate": "2016-06-28T02:49:35.77",
+	    "courseName": "isExpired (true) courseStatus (inprogress) Laundering"
+	  }];
+
 	  return {
 	    type: _types.ISOTOPE,
 	    payload: request
@@ -35825,7 +36096,6 @@
 	}
 
 	function clearState(expression) {
-
 	  switch (expression) {
 	    case "ISOTOPE":
 	      return {
@@ -37364,9 +37634,7 @@
 	}(_react.Component);
 
 	function mapState(state) {
-	  return {
-	    "tooltip": state.tooltip
-	  };
+	  return { "tooltip": state.tooltip };
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapState)(ToolTip);
@@ -37417,8 +37685,8 @@
 	  }
 
 	  _createClass(Modal, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
 	      this.state = {
 	        "visible": false,
 	        "shouldVisible": false
@@ -37484,28 +37752,32 @@
 	                { className: "modal fade" + isIn, style: { "display": "block" } },
 	                _react2.default.createElement(
 	                  'div',
-	                  { className: "modal-dialog " + this.props.modal.size },
+	                  { className: 'vertical-alignment-helper' },
 	                  _react2.default.createElement(
 	                    'div',
-	                    { className: 'modal-content' },
+	                    { className: "modal-dialog vertical-align-center " + this.props.modal.size },
 	                    _react2.default.createElement(
 	                      'div',
-	                      { className: 'modal-header' },
+	                      { className: 'modal-content' },
 	                      _react2.default.createElement(
-	                        'h2',
-	                        { className: 'modal-title' },
-	                        this.props.modal.title
+	                        'div',
+	                        { className: 'modal-header' },
+	                        _react2.default.createElement(
+	                          'h2',
+	                          { className: 'modal-title' },
+	                          this.props.modal.title
+	                        ),
+	                        _react2.default.createElement('button', { type: 'button', onClick: function onClick() {
+	                            return _this2.props.getModal({ "visible": false });
+	                          }, className: 'close' })
 	                      ),
-	                      _react2.default.createElement('button', { type: 'button', onClick: function onClick() {
-	                          return _this2.props.getModal({ "visible": false });
-	                        }, className: 'close' })
-	                    ),
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'modal-body' },
-	                      this.createBody()
-	                    ),
-	                    this.footer(this.props.modal.footer)
+	                      _react2.default.createElement(
+	                        'div',
+	                        { className: 'modal-body' },
+	                        this.createBody()
+	                      ),
+	                      this.footer(this.props.modal.footer)
+	                    )
 	                  )
 	                )
 	              )
@@ -37619,37 +37891,39 @@
 	var Login = function (_Component) {
 	  _inherits(Login, _Component);
 
-	  function Login(props) {
+	  function Login() {
 	    _classCallCheck(this, Login);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this, props));
-
-	    _this.state = {
-	      "email": "",
-	      "pass": "",
-	      "waiting": false,
-	      "valid": true,
-	      "remember": false,
-	      "readOnly": true,
-	      "allowLogin": false
-	    };
-
-	    var instance = _this;
-	    setTimeout(function () {
-	      instance.setState({ "readOnly": false });
-	      if (typeof Storage === 'undefined' ? 'undefined' : _typeof(Storage)) {
-	        if (typeof localStorage.email != "undefined") {
-	          instance.setState({ "remember": true });
-	          instance.setState({ "email": localStorage.email });
-	          instance.setState({ "pass": localStorage.pass });
-	          instance.checkAllowLogin(instance.state.email);
-	        }
-	      }
-	    }, 100);
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Login).apply(this, arguments));
 	  }
 
 	  _createClass(Login, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.state = {
+	        "email": "",
+	        "pass": "",
+	        "waiting": false,
+	        "valid": true,
+	        "remember": false,
+	        "readOnly": true,
+	        "allowLogin": false
+	      };
+
+	      var instance = this;
+	      setTimeout(function () {
+	        instance.setState({ "readOnly": false });
+	        if (typeof Storage === 'undefined' ? 'undefined' : _typeof(Storage)) {
+	          if (typeof localStorage.email != "undefined") {
+	            instance.setState({ "remember": true });
+	            instance.setState({ "email": localStorage.email });
+	            instance.setState({ "pass": localStorage.pass });
+	            instance.checkAllowLogin(instance.state.email);
+	          }
+	        }
+	      }, 100);
+	    }
+	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.checkAllowLogin(this.state.email);
@@ -37881,9 +38155,7 @@
 
 
 	function mapState(state) {
-	  return {
-	    auth: state.auth
-	  };
+	  return { auth: state.auth };
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapState, actions)(Login);
@@ -37917,21 +38189,27 @@
 	var InputField = function (_Component) {
 	  _inherits(InputField, _Component);
 
-	  function InputField(props) {
+	  function InputField() {
 	    _classCallCheck(this, InputField);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(InputField).call(this, props));
-
-	    var cond = _this.props.value.length <= 0;
-	    //console.log(this.props.value);
-	    _this.state = {
-	      "status": cond ? "" : " up",
-	      "placeholder": cond ? "" : _this.props.placeholder
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(InputField).apply(this, arguments));
 	  }
 
 	  _createClass(InputField, [{
+	    key: "componentWillMount",
+	    value: function componentWillMount() {
+	      var cond;
+	      if (typeof this.props != "undefined") {
+	        cond = this.props.value.length <= 0;
+	      } else {
+	        cond = true;
+	      }
+	      this.state = {
+	        "status": cond ? "" : " up",
+	        "placeholder": cond ? "" : this.props.placeholder
+	      };
+	    }
+	  }, {
 	    key: "onFocused",
 	    value: function onFocused() {
 	      this.setState({ "status": " up" });
@@ -38013,13 +38291,14 @@
 	  }
 
 	  _createClass(Logout, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
 	      this.props.authentication(false);
 	      this.props.clearState("COURSE_COUNTERS");
 	      this.props.clearState("FETCH_BRAND");
 	      sessionStorage.removeItem("auth");
 	      sessionStorage.removeItem("userName");
+	      sessionStorage.removeItem("leftMenu");
 	      this.context.router.push("/LS360Dashboard/login");
 	    }
 	  }, {
@@ -38327,30 +38606,32 @@
 	var Courses = function (_Component) {
 	  _inherits(Courses, _Component);
 
-	  function Courses(props) {
+	  function Courses() {
 	    _classCallCheck(this, Courses);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Courses).call(this, props));
-
-	    _this.props.clearState("COURSE_COUNTERS");
-	    _this.props.courseCounters();
-	    _this.state = {
-	      "api_status": 0
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Courses).apply(this, arguments));
 	  }
 
 	  _createClass(Courses, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.props.clearState("COURSE_COUNTERS");
+	      this.props.courseCounters();
+	      this.state = {
+	        "apiStatus": 0
+	      };
+	    }
+	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
 	      if (typeof nextProps.counters.all == "number") {
-	        this.setState({ "api_status": 1 });
+	        this.setState({ "apiStatus": 1 });
 	      }
 	    }
 	  }, {
 	    key: 'translateStatus',
 	    value: function translateStatus() {
-	      switch (this.state.api_status) {
+	      switch (this.state.apiStatus) {
 	        case 0:
 	          //  loading
 	          return " pre-loader";
@@ -38450,9 +38731,7 @@
 	}(_react.Component);
 
 	function mapState(state) {
-	  return {
-	    "counters": state.courseCounters
-	  };
+	  return { "counters": state.courseCounters };
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapState, actions)(Courses);
@@ -38493,17 +38772,29 @@
 	  function IsoContainer() {
 	    _classCallCheck(this, IsoContainer);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(IsoContainer).call(this));
-
-	    inst = _this;
-	    _this.state = {
-	      "menu_open": false,
-	      "affix": false
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(IsoContainer).apply(this, arguments));
 	  }
 
 	  _createClass(IsoContainer, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      inst = this;
+	      this.state = {
+	        "menu_open": false,
+	        "affix": false
+	      };
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      document.getElementById("wrapper").addEventListener('scroll', this.handleScroll);
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      document.getElementById("wrapper").removeEventListener('scroll', this.handleScroll);
+	    }
+	  }, {
 	    key: 'onClickMenu',
 	    value: function onClickMenu() {
 	      this.setState({ "menu_open": !this.state.menu_open });
@@ -38520,16 +38811,6 @@
 	        //console.log(2);
 	        inst.setState({ "affix": true });
 	      }
-	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      document.getElementById("wrapper").addEventListener('scroll', this.handleScroll);
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      document.getElementById("wrapper").removeEventListener('scroll', this.handleScroll);
 	    }
 	  }, {
 	    key: 'render',
@@ -38730,51 +39011,47 @@
 	var IsoContent = function (_Component) {
 	  _inherits(IsoContent, _Component);
 
+	  function IsoContent() {
+	    _classCallCheck(this, IsoContent);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(IsoContent).apply(this, arguments));
+	  }
+
 	  _createClass(IsoContent, [{
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
 	      ui.isoTope.init();
 	    }
-	  }]);
-
-	  function IsoContent(props) {
-	    _classCallCheck(this, IsoContent);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(IsoContent).call(this, props));
-
-	    _this.props.clearState("ISOTOPE");
-	    _this.props.getIsotope();
-	    _this.state = {
-	      "api_status": 0
-	    };
-	    return _this;
-	  }
-
-	  _createClass(IsoContent, [{
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.props.clearState("ISOTOPE");
+	      this.props.getIsotope();
+	      this.state = {
+	        "isLoading": true,
+	        "isFirstTime": true,
+	        "list": []
+	      };
+	    }
+	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
-	      if (nextProps.isotope.length > 0) {
-	        this.setState({ "api_status": 1 });
-	      } else {
-	        this.setState({ "api_status": 0 });
+	      this.setState({ "list": this.state.list.concat(nextProps.isotope) });
+
+	      if (!this.state.isFirstTime) {
+	        this.setState({ "isLoading": false });
 	      }
+	      this.setState({ "isFirstTime": false });
 	    }
 	  }, {
 	    key: 'checkAPIStatus',
 	    value: function checkAPIStatus() {
-	      switch (this.state.api_status) {
-	        case 0:
-	          //  loading
-	          return _react2.default.createElement('div', { className: 'pre-loader' });
-	          break;
-	        case 1:
-	          //  success
-	          return "";
-	          break;
-	        case 2:
-	          //  fail
-	          return _react2.default.createElement('div', { className: 'result-fail' });
-	          break;
+	      if (!this.state.isLoading) {
+	        //  success
+	        return "";
+	      } else {
+	        //  loading
+	        return _react2.default.createElement('div', { className: 'pre-loader' });
 	      }
 	    }
 	  }, {
@@ -38784,13 +39061,13 @@
 	      if (path == "" || path == "null" || path == null) {
 	        switch (data.courseType) {
 	          case "Online Course":
-	            path = "../assets/img/default-online.jpg";
+	            path = "resources/assets/img/default-online.jpg";
 	            break;
 	          case "Classroom Course":
-	            path = "../assets/img/default-classroom.jpg";
+	            path = "resources/assets/img/default-classroom.jpg";
 	            break;
 	          case "Webinar Course":
-	            path = "../assets/img/default-webinar.jpg";
+	            path = "resources/assets/img/default-webinar.jpg";
 	            break;
 	        }
 	      }
@@ -38852,7 +39129,7 @@
 	    key: 'title',
 	    value: function title(data) {
 	      var str = data.courseName;
-	      var limit = 62;
+	      var limit = 48;
 	      if (str.length > limit) {
 	        str = str.slice(0, limit) + "...";
 	      }
@@ -38872,9 +39149,10 @@
 	          _react2.default.createElement('span', { style: { width: 100 * 1.8 } })
 	        );
 	      } else {
+	        data.isExpireSoon ? data.isExpireSoon = " red" : data.isExpireSoon = "";
 	        return _react2.default.createElement(
 	          'div',
-	          { className: 'iso-progress-bar' },
+	          { className: "iso-progress-bar" + data.isExpireSoon },
 	          _react2.default.createElement('span', { style: { width: data.courseProgress * 1.8 } })
 	        );
 	      }
@@ -38907,6 +39185,13 @@
 	              'div',
 	              { className: 'iso-status' },
 	              "Completed " + this.dateConverion(data.completionDate, false)
+	            );
+	          }
+	          if (data.isExpireSoon) {
+	            return _react2.default.createElement(
+	              'div',
+	              { className: 'iso-status text-red' },
+	              'Expires Soon'
 	            );
 	          }
 	          break;
@@ -38945,6 +39230,8 @@
 	  }, {
 	    key: 'bottomBtns',
 	    value: function bottomBtns(data) {
+	      var _this3 = this;
+
 	      switch (data.courseType) {
 	        case "Online Course":
 	          if (data.isExpired) {
@@ -38958,6 +39245,38 @@
 	                  'a',
 	                  { className: 'info-icon', href: 'javascript:void(0);' },
 	                  'info'
+	                )
+	              )
+	            );
+	          } else if (data.isExpireSoon) {
+	            return _react2.default.createElement(
+	              'div',
+	              { className: 'iso-bottom-options' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'iso-icons' },
+	                _react2.default.createElement(
+	                  'a',
+	                  { className: 'play-icon', href: 'javascript:void(0);' },
+	                  'play'
+	                ),
+	                _react2.default.createElement(
+	                  'a',
+	                  { className: 'info-icon', href: 'javascript:void(0);' },
+	                  'info'
+	                ),
+	                _react2.default.createElement(
+	                  'a',
+	                  { className: 'expire-soon-icon pull-right', href: 'javascript:void(0);', title: 'This Course Is Expiring',
+	                    onClick: function onClick() {
+	                      return _this3.props.getModal({
+	                        "visible": true,
+	                        "title": "This Course Is Expiring",
+	                        "body": "<div class='left-icon expire-soon'>Please note that this course will be expiring on <span class='text-red'>" + _this3.dateConverion(data.expiryDate, true) + "</span>. In order to have full access and pass this course, you must finish it before it expires. Expired courses prior to completion means you will have to re-enroll.</div>",
+	                        "size": "modal-md"
+	                      });
+	                    } },
+	                  'expire soon'
 	                )
 	              )
 	            );
@@ -39064,8 +39383,24 @@
 	      }
 	    }
 	  }, {
+	    key: 'isExpiredOrSoon',
+	    value: function isExpiredOrSoon(currentDate, expDate) {
+	      //currentDate = "2016-07-11";
+	      //expDate = "2016-07-22";
+	      var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+	      currentDate = new Date(currentDate);
+	      expDate = new Date(expDate);
+	      var diffDays = Math.round((currentDate.getTime() - expDate.getTime()) / oneDay);
+	      //console.log(diffDays, diffDays >= -10, diffDays >= 0);
+	      return [diffDays >= 0, diffDays >= -10];
+	    }
+	  }, {
 	    key: 'box',
 	    value: function box(data, i) {
+	      var cData = this.isExpiredOrSoon(this.props.currentDate, data.expiryDate);
+	      data.isExpired = cData[0];
+	      data.isExpireSoon = cData[1];
+
 	      return _react2.default.createElement(
 	        'div',
 	        { key: i, className: "iso-item single " + data.courseStatus },
@@ -39090,7 +39425,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { id: 'isotope' },
-	            this.props.isotope.map(this.box, this)
+	            this.state.list.map(this.box, this)
 	          ),
 	          this.checkAPIStatus()
 	        );
@@ -39108,7 +39443,7 @@
 	}(_react.Component);
 
 	function mapStatToProps(state) {
-	  return { "isotope": state.isotope };
+	  return { "isotope": state.isotope, "currentDate": state.branding.serverCurrentDate };
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStatToProps, actions)(IsoContent);

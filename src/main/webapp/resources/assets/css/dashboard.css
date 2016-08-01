@@ -1,6 +1,27 @@
 /* load Open Sans Font from local */
 @import url(../fonts/font.css);
 
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+    pointer-events:none; /* This makes sure that we can still click outside of the modal to close it */
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events:none;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+    pointer-events: all;
+}
+
 iframe{
 	border: 0;
   width: 100%;
@@ -8,14 +29,15 @@ iframe{
 }
 
 .text-red{
-	color: #FF0000;
+	color: #d0021b !important;
 }
 
-.modal-body .left-icon.expired{
+.modal-body .left-icon{
 	margin-left: 80px;
+	font-size: 13px;
 }
 
-.modal-body .left-icon.expired::before{
+.modal-body .left-icon::before{
 	content: "";
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -29,7 +51,9 @@ iframe{
 .modal-body .left-icon.expired::before{
 	background-image:url("../img/icons/exclamation.svg");
 }
-
+.modal-body .left-icon.expire-soon::before{
+	background-image:url("../img/icons/exclamation-red.svg");
+}
 .modal-header .close{
 	background-image: url("../img/icons/close.svg");
   background-size: contain;

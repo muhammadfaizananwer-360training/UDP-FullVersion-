@@ -179,6 +179,7 @@
   text-transform: capitalize;
   height: 84px;
 	cursor: default;
+	overflow: hidden;
 }
 .iso-container .iso-item.single .front .iso-date-time{
 	color: #0280d4;
@@ -186,7 +187,7 @@
 	font-weight: 400;
 	line-height: 14px;
 	text-align: left;
-	padding: 0 30px 0 15px;
+	padding: 0 35px 0 15px;
 }
 .iso-container .iso-item.single .front .iso-progress-bar{
 	height: 3px;
@@ -200,14 +201,19 @@
 	border-radius: 100px;
 	display: block;
 }
+.iso-container .iso-item.single .front .iso-progress-bar.red span{
+	background-color: #d0021b;
+}
 .iso-container .iso-item.single .front .iso-time-take{
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: 300;
 	color: #bac2c7;
 	line-height: 14px;
 	text-align: right;
 	padding: 0px 10px;
   text-transform: lowercase;
+	position: absolute;
+  right: 0;
 }
 .iso-container .iso-item.single .front .iso-status{
 	font-size: 12px;
@@ -242,22 +248,25 @@
 	margin-right:5px;
 }
 .iso-container .iso-item.single .front .iso-icons a.play-icon{
-	background-image:url(../img/icons/play.svg);
+	background-image:url("../img/icons/play.svg");
 }
 .iso-container .iso-item.single .front .iso-icons a.retake-icon{
-	background-image:url(../img/icons/retake.svg);
+	background-image:url("../img/icons/retake.svg");
 }
 .iso-container .iso-item.single .front .iso-icons a.info-icon{
-	background-image:url(../img/icons/info.svg);
+	background-image:url("../img/icons/info.svg");
 }
 .iso-container .iso-item.single .front .iso-icons a.setting-icon{
-	background-image:url(../img/icons/setting.svg);
+	background-image:url("../img/icons/setting.svg");
 }
 .iso-container .iso-item.single .front .iso-icons a.warning-icon{
-	background-image:url(../img/icons/warning.svg);
+	background-image:url("../img/icons/warning.svg");
 }
 .iso-container .iso-item.single .front .iso-icons a.certificate-icon{
-	background-image:url(../img/icons/certificate.svg);
+	background-image:url("../img/icons/certificate.svg");
+}
+.iso-container .iso-item.single .front .iso-icons a.expire-soon-icon{
+	background-image:url("../img/icons/exclamation-red.svg");
 }
 .iso-container .iso-item.single .front .iso-icons a.pull-right{
 	margin-left:5px;
