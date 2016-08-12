@@ -2,11 +2,14 @@
 #isotope{
 	margin: 0px -4px;
 }
-
+#isotope:after {
+  content: '';
+  display: block;
+  clear: both;
+}
 .iso-container.fixed #isotope{
 	margin-top: 50px;
 }
-
 .iso-main-btn{
 	position: absolute;
 	left: 0;
@@ -15,7 +18,6 @@
 	width: 100%;
 	height: 110px;
 }
-
 .iso-main-btn::before{
 	content: "";
 	background-position: center center;
@@ -29,7 +31,6 @@
   z-index: 1;
   margin-top: 6px;
 }
-
 .iso-main-btn::after{
 	content: "";
   position: absolute;
@@ -43,11 +44,15 @@
   filter: alpha(opacity=80);
   border-radius: 50%;
 }
-
 .iso-main-btn.expired::before{
 	background-image:url("../img/icons/exclamation.svg");
 }
-
+.iso-main-btn.locked::before{
+	background-image:url("../img/icons/lock.svg");
+}
+.iso-main-btn.play::before{
+	background-image:url("../img/icons/play.svg");
+}
 .iso-container .iso-header{
 	background-color: #4d4d4d;
   display: table;
@@ -124,12 +129,10 @@
   right: 5px;
   left: 5px;
 }
-
 .iso-container .iso-header .merge-filter-sorting{
 	display: none;
 	text-align:right;
 }
-
 .iso-container .iso-header .filters button{
 	background-color: #4d4d4d;
   color: #fff;
@@ -138,15 +141,8 @@
 	border:none;
 	outline:none;
 }
-
 .iso-container .iso-header .filters button:first-child{
 	margin-left: 10px;
-}
-
-#isotope:after {
-  content: '';
-  display: block;
-  clear: both;
 }
 .iso-container .iso-item {
 	margin: 5px;
@@ -168,6 +164,15 @@
   background-repeat: no-repeat;
   background-size: cover;
 	background-color: #eee;
+}
+.iso-container .iso-item.single .front .iso-image.online{
+	background-image: url("../img/default-online.jpg");
+}
+.iso-container .iso-item.single .front .iso-image.classroom{
+	background-image: url("../img/default-classroom.jpg");
+}
+.iso-container .iso-item.single .front .iso-image.webinar{
+	background-image: url("../img/default-webinar.jpg");
 }
 .iso-container .iso-item.single:nth-child(odd) .front .iso-title{
 	color: #0280d4;
@@ -267,6 +272,12 @@
 }
 .iso-container .iso-item.single .front .iso-icons a.expire-soon-icon{
 	background-image:url("../img/icons/exclamation-red.svg");
+}
+.iso-container .iso-item.single .front .iso-icons a.view-assessment-icon{
+	background-image:url("../img/icons/view-assessment.svg");
+}
+.iso-container .iso-item.single .front .iso-icons a.locked-icon{
+	background-image:url("../img/icons/lock.svg");
 }
 .iso-container .iso-item.single .front .iso-icons a.pull-right{
 	margin-left:5px;

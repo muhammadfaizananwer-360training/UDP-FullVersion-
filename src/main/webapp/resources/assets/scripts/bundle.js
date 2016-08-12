@@ -8142,103 +8142,105 @@
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
-	var _async = __webpack_require__(555);
+	var _async = __webpack_require__(557);
 
 	var _async2 = _interopRequireDefault(_async);
 
-	var _auth = __webpack_require__(556);
+	var _auth = __webpack_require__(558);
 
 	var _auth2 = _interopRequireDefault(_auth);
 
-	var _app = __webpack_require__(557);
+	var _app = __webpack_require__(559);
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _login = __webpack_require__(582);
+	var _login = __webpack_require__(584);
 
 	var _login2 = _interopRequireDefault(_login);
 
-	var _logout = __webpack_require__(584);
+	var _logout = __webpack_require__(586);
 
 	var _logout2 = _interopRequireDefault(_logout);
 
-	var _accountInfo = __webpack_require__(585);
+	var _token = __webpack_require__(587);
+
+	var _token2 = _interopRequireDefault(_token);
+
+	var _accountInfo = __webpack_require__(588);
 
 	var _accountInfo2 = _interopRequireDefault(_accountInfo);
 
-	var _addressBook = __webpack_require__(586);
+	var _addressBook = __webpack_require__(589);
 
 	var _addressBook2 = _interopRequireDefault(_addressBook);
 
-	var _billing = __webpack_require__(587);
+	var _billing = __webpack_require__(590);
 
 	var _billing2 = _interopRequireDefault(_billing);
 
-	var _browseFreeCourses = __webpack_require__(588);
+	var _browseFreeCourses = __webpack_require__(591);
 
 	var _browseFreeCourses2 = _interopRequireDefault(_browseFreeCourses);
 
-	var _courseReport = __webpack_require__(589);
+	var _courseReport = __webpack_require__(592);
 
 	var _courseReport2 = _interopRequireDefault(_courseReport);
 
-	var _courses = __webpack_require__(590);
+	var _courses = __webpack_require__(593);
 
 	var _courses2 = _interopRequireDefault(_courses);
 
-	var _createCourse = __webpack_require__(593);
+	var _createCourse = __webpack_require__(597);
 
 	var _createCourse2 = _interopRequireDefault(_createCourse);
 
-	var _enrollUsers = __webpack_require__(594);
+	var _enrollUsers = __webpack_require__(598);
 
 	var _enrollUsers2 = _interopRequireDefault(_enrollUsers);
 
-	var _manageUsers = __webpack_require__(595);
+	var _manageUsers = __webpack_require__(599);
 
 	var _manageUsers2 = _interopRequireDefault(_manageUsers);
 
-	var _orders = __webpack_require__(596);
+	var _orders = __webpack_require__(600);
 
 	var _orders2 = _interopRequireDefault(_orders);
 
-	var _privacyPolicy = __webpack_require__(597);
+	var _privacyPolicy = __webpack_require__(601);
 
 	var _privacyPolicy2 = _interopRequireDefault(_privacyPolicy);
 
-	var _runReport = __webpack_require__(598);
+	var _runReport = __webpack_require__(602);
 
 	var _runReport2 = _interopRequireDefault(_runReport);
 
-	var _shop = __webpack_require__(599);
+	var _shop = __webpack_require__(603);
 
 	var _shop2 = _interopRequireDefault(_shop);
 
-	var _subscriptions = __webpack_require__(600);
+	var _subscriptions = __webpack_require__(604);
 
 	var _subscriptions2 = _interopRequireDefault(_subscriptions);
 
-	var _support = __webpack_require__(601);
+	var _support = __webpack_require__(605);
 
 	var _support2 = _interopRequireDefault(_support);
 
-	var _terms = __webpack_require__(602);
+	var _terms = __webpack_require__(606);
 
 	var _terms2 = _interopRequireDefault(_terms);
 
-	var _notFound = __webpack_require__(603);
+	var _notFound = __webpack_require__(607);
 
 	var _notFound2 = _interopRequireDefault(_notFound);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	//  App Root Components
+	//  App Core Libraries
 	var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_async2.default)(_redux.createStore);
 
 	//  App Inner Components
-
-
-	//  App Root Components
-	//  App Core Libraries
 
 
 	_reactDom2.default.render(_react2.default.createElement(
@@ -8253,6 +8255,7 @@
 	      _react2.default.createElement(
 	        _reactRouter.Route,
 	        { path: 'LS360Dashboard' },
+	        _react2.default.createElement(_reactRouter.Route, { path: 'token', component: _token2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _login2.default }),
 	        _react2.default.createElement(
 	          _reactRouter.Route,
@@ -35160,6 +35163,14 @@
 
 	var _modal2 = _interopRequireDefault(_modal);
 
+	var _courseDetail = __webpack_require__(555);
+
+	var _courseDetail2 = _interopRequireDefault(_courseDetail);
+
+	var _tokenVerification = __webpack_require__(556);
+
+	var _tokenVerification2 = _interopRequireDefault(_tokenVerification);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var rootReducer = (0, _redux.combineReducers)({
@@ -35170,7 +35181,9 @@
 	  "courseCounters": _courseCounters2.default,
 	  "auth": _auth2.default,
 	  "isotope": _isotope2.default,
-	  "modal": _modal2.default
+	  "modal": _modal2.default,
+	  "courseDetail": _courseDetail2.default,
+	  "tokenVerification": _tokenVerification2.default
 	});
 
 	exports.default = rootReducer;
@@ -35218,6 +35231,8 @@
 	var COURSE_COUNTERS = exports.COURSE_COUNTERS = 'course_counters';
 	var ISOTOPE = exports.ISOTOPE = 'isotope';
 	var MODAL = exports.MODAL = 'modal';
+	var COURSE_DETAIL = exports.COURSE_DETAIL = 'course_detail';
+	var TOKEN_VERIFICATION = exports.TOKEN_VERIFICATION = 'token_verification';
 
 /***/ },
 /* 548 */
@@ -35416,6 +35431,58 @@
 
 /***/ },
 /* 555 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function () {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _types.COURSE_DETAIL:
+	      //console.log(action.payload);
+	      return action.payload;
+	  }
+	  return state;
+	};
+
+	var _types = __webpack_require__(547);
+
+	;
+
+/***/ },
+/* 556 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function () {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _types.TOKEN_VERIFICATION:
+	      //console.log(action.payload);
+	      return action.payload;
+	  }
+	  return state;
+	};
+
+	var _types = __webpack_require__(547);
+
+	;
+
+/***/ },
+/* 557 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -35447,7 +35514,7 @@
 	        dispatch(_extends({}, action, { payload: response.data }));
 	      }).catch(function (response) {
 	        //const newAction = {...action, payload:response}
-	        console.log(response);
+	        //console.log(response);
 	        dispatch(_extends({}, action, { payload: response.data }));
 	      });
 	    };
@@ -35455,7 +35522,7 @@
 	};
 
 /***/ },
-/* 556 */
+/* 558 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35493,7 +35560,7 @@
 	    _createClass(Auth, [{
 	      key: 'componentWillMount',
 	      value: function componentWillMount() {
-	        if (this.props.auth == false || typeof this.props.auth == "undefined") {
+	        if (typeof this.props.auth == "undefined" || this.props.auth == false || this.props.auth == "false") {
 	          this.context.router.push('/LS360Dashboard/login');
 	        }
 	      }
@@ -35529,7 +35596,7 @@
 	};
 
 /***/ },
-/* 557 */
+/* 559 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35548,23 +35615,23 @@
 
 	var _reactRedux = __webpack_require__(456);
 
-	var _actions = __webpack_require__(558);
+	var _actions = __webpack_require__(560);
 
 	var actions = _interopRequireWildcard(_actions);
 
-	var _header = __webpack_require__(577);
+	var _header = __webpack_require__(579);
 
 	var _header2 = _interopRequireDefault(_header);
 
-	var _leftMenu = __webpack_require__(578);
+	var _leftMenu = __webpack_require__(580);
 
 	var _leftMenu2 = _interopRequireDefault(_leftMenu);
 
-	var _toolTip = __webpack_require__(579);
+	var _toolTip = __webpack_require__(581);
 
 	var _toolTip2 = _interopRequireDefault(_toolTip);
 
-	var _modal = __webpack_require__(580);
+	var _modal = __webpack_require__(582);
 
 	var _modal2 = _interopRequireDefault(_modal);
 
@@ -35590,7 +35657,8 @@
 	  _createClass(App, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      if (typeof this.props.auth != "undefined") {
+	      //console.log(this.props.auth);
+	      if (typeof this.props.auth != "undefined" && this.props.auth != false && this.props.auth != "false") {
 	        this.props.fetchBrand();
 	        this.props.topMenuToggle(false);
 	        if ((typeof Storage === 'undefined' ? 'undefined' : _typeof(Storage)) && typeof sessionStorage.leftMenu != "undefined") {
@@ -35600,6 +35668,12 @@
 	          this.props.leftMenuToggle(true);
 	        }
 	      }
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.props.authentication(false);
+	      this.props.clearState("FETCH_BRAND");
 	    }
 	  }, {
 	    key: 'render',
@@ -35649,7 +35723,7 @@
 	exports.default = (0, _reactRedux.connect)(mapState, actions)(App);
 
 /***/ },
-/* 558 */
+/* 560 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35666,8 +35740,10 @@
 	exports.getIsotope = getIsotope;
 	exports.clearState = clearState;
 	exports.getModal = getModal;
+	exports.getCourseDetail = getCourseDetail;
+	exports.tokenVerify = tokenVerify;
 
-	var _axios = __webpack_require__(559);
+	var _axios = __webpack_require__(561);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
@@ -35675,13 +35751,14 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var server = 'http://10.0.215.78:8080'; //QA
-	//var server = 'http://10.0.100.97:8080'; //DEV Noman
+	var apiServer = 'http://10.0.215.78:8080'; //QA
+	//var apiServer = 'http://10.0.100.97:8080'; //DEV Noman
+	//var apiServer = 'http://10.0.100.94:8080'; // DEV Irfan
+	var appServer = apiServer; //'http://localhost:8081';
 
 	function authentication(isLogin) {
 	  var userName = arguments.length <= 1 || arguments[1] === undefined ? "" : arguments[1];
 	  var pass = arguments.length <= 2 || arguments[2] === undefined ? "" : arguments[2];
-
 
 	  var token = false;
 	  if (isLogin) {
@@ -35694,8 +35771,7 @@
 	        "password": pass
 	      }
 	    };
-	    token = _axios2.default.get(server + "/LS360Dashboard/token/get", config);
-	    //token = axios.get("/LS360Dashboard/token/get",config);
+	    token = _axios2.default.get(appServer + "/LS360Dashboard/token/get", config);
 	    //token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIyMDE2LTA2LTI5VDAyOjE4OjQ0LjIzMiIsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9MRUFSTkVSIiwiUk9MRV9UUkFJTklOR0FETUlOSVNUUkFUT1IiLCJST0xFX0lOU1RSVUNUT1IiLCJST0xFX1JFR1VMQVRPUllBTkFMWVNUIiwiUk9MRV9MTVNBRE1JTklTVFJBVE9SIl0sImNsaWVudF9pZCI6IlRlc3RDbGllbnQiLCJzY29wZSI6WyJSRUFEIiwiVFJVU1QiLCJXUklURSJdfQ.QMxYwULpVR2rAMYjqtR3AvPpg_4LhZdjgp80juFwOAk";
 	    sessionStorage.setItem("userName", userName);
 	  }
@@ -35707,7 +35783,6 @@
 	}
 
 	function fetchBrand() {
-
 	  var config = {
 	    headers: {
 	      'Access-Control-Allow-Origin': '*',
@@ -35719,7 +35794,7 @@
 	    }
 	  };
 
-	  var request = _axios2.default.post(server + "/LS360ApiGateway/services/rest/brand", JSON.stringify({
+	  var request = _axios2.default.post(apiServer + "/LS360ApiGateway/services/rest/brand", JSON.stringify({
 	    "username": sessionStorage.userName
 	  }), config);
 
@@ -35822,7 +35897,7 @@
 	      access_token: sessionStorage.auth
 	    }
 	  };
-	  var request = _axios2.default.post(server + "/LS360ApiGateway/services/rest/lms/customer/learner/course/count", JSON.stringify({
+	  var request = _axios2.default.post(apiServer + "/LS360ApiGateway/services/rest/lms/customer/learner/course/count", JSON.stringify({
 	    "userName": sessionStorage.userName,
 	    "countType": ["all", "subscriptions", "completed", "inProgress", "notstarted"]
 	  }), config);
@@ -35842,7 +35917,6 @@
 	}
 
 	function getIsotope() {
-
 	  var config = {
 	    headers: {
 	      'Access-Control-Allow-Origin': '*',
@@ -35854,16 +35928,14 @@
 	    }
 	  };
 
-	  var request = _axios2.default.post(server + "/LS360ApiGateway/services/rest/lms/customer/learner/courses", JSON.stringify({
+	  var request = _axios2.default.post(apiServer + "/LS360ApiGateway/services/rest/lms/customer/learner/courses", JSON.stringify({
 	    "userName": sessionStorage.userName
 	  }), config);
-
-	  //const request = [];
 
 	  var request2 = [{ "courseSubType": "Self Paced Course",
 	    "startDate": "2016-07-28T23:59:59",
 	    "viewAssessmentURI": "#",
-	    "enrollmentId": 123456,
+	    "enrollmentId": 5618,
 	    "expiryDate": "2016-08-10T23:59:59",
 	    "certificateURI": "#",
 	    "timeSpent": "1H 24M",
@@ -35872,7 +35944,7 @@
 	    "isExpired": false,
 	    "courseGUID": "2a8cacb1b6e3455caf8ca9e9d19ce9ee",
 	    "courseProgress": 10,
-	    "courseStatus": "inprogress",
+	    "courseStatus": "completed",
 	    "launchURI": "#",
 	    "subscriptionTag": "#",
 	    "courseType": "Online Course",
@@ -36015,7 +36087,7 @@
 	    "courseSubType": "Self Paced Course",
 	    "startDate": "2016-06-28T02:49:35.77",
 	    "viewAssessmentURI": "#",
-	    "enrollmentId": 123456,
+	    "enrollmentId": 5618,
 	    "expiryDate": "2016-06-28T02:49:35.77",
 	    "certificateURI": "#",
 	    "timeSpent": "1H 24M",
@@ -36034,7 +36106,7 @@
 	    "courseSubType": "Self Paced Course",
 	    "startDate": "2016-06-28T02:49:35.77",
 	    "viewAssessmentURI": "#",
-	    "enrollmentId": 123456,
+	    "enrollmentId": 5618,
 	    "expiryDate": "2016-06-28T02:49:35.77",
 	    "certificateURI": "#",
 	    "timeSpent": "1H 24M",
@@ -36053,7 +36125,7 @@
 	    "courseSubType": "Self Paced Course",
 	    "startDate": "2016-06-28T02:49:35.77",
 	    "viewAssessmentURI": "#",
-	    "enrollmentId": 123456,
+	    "enrollmentId": 5618,
 	    "expiryDate": "2016-06-28T02:49:35.77",
 	    "certificateURI": "#",
 	    "timeSpent": "1H 24M",
@@ -36072,7 +36144,7 @@
 	    "courseSubType": "Self Paced Course",
 	    "startDate": "2016-06-28T02:49:35.77",
 	    "viewAssessmentURI": "#",
-	    "enrollmentId": 123456,
+	    "enrollmentId": 5618,
 	    "expiryDate": "2016-06-28T02:49:35.77",
 	    "certificateURI": "#",
 	    "timeSpent": "1H 24M",
@@ -36115,6 +36187,12 @@
 	        payload: {}
 	      };
 	      break;
+	    case "COURSE_DETAIL":
+	      return {
+	        type: _types.COURSE_DETAIL,
+	        payload: []
+	      };
+	      break;
 	  }
 	}
 
@@ -36127,26 +36205,95 @@
 	  };
 	}
 
+	function getCourseDetail(eId) {
+
+	  var config = {
+	    headers: {
+	      'Access-Control-Allow-Origin': '*',
+	      'Content-Type': 'application/json',
+	      'Authorization': "bearer " + sessionStorage.auth
+	    },
+	    params: {
+	      access_token: sessionStorage.auth
+	    }
+	  };
+
+	  var request = _axios2.default.post(apiServer + "/LS360ApiGateway/services/rest/lms/learner/courses/statistics/byEnrollmentId", JSON.stringify({
+	    "enrollmentId": [eId]
+	  }), config);
+
+	  var request2 = [{
+	    "firstAccessDate": "2015-02-20T19:08:55.57",
+	    "lastAccessDate": "2015-02-20T19:25:41.277",
+	    "launchesOccrued": 5,
+	    "preTestDate": null,
+	    "pretestScore": -1,
+	    "completed": true,
+	    "status": "Reported",
+	    "completionDate": "2015-02-20T19:28:08.137",
+	    "percentComplete": 100,
+	    "lowestPostTestScore": 75,
+	    "averagePostTestScore": 75,
+	    "highestPostTestScore": 75,
+	    "firstPostTestDate": "2015-02-20T19:22:51.993",
+	    "lastPostTestDate": "2015-02-20T19:22:51.993",
+	    "numberPostTestsTaken": 1,
+	    "lowestQuizScore": -1,
+	    "averageQuizScore": 0,
+	    "highestQuizScore": 0,
+	    "numberQuizesTaken": 0,
+	    "firstQuizDate": null,
+	    "lastQuizDate": null,
+	    "totalTimeInSeconds": 2465,
+	    "certificateNumber": "OSHA-000632",
+	    "certificateIssuedDate": "2015-02-20T19:28:08.337",
+	    "learnerEnrollmentId": 247835
+	  }];
+
+	  return {
+	    type: _types.COURSE_DETAIL,
+	    payload: request
+	  };
+	}
+
+	function tokenVerify(token) {
+	  var config = {
+	    headers: {
+	      'Access-Control-Allow-Origin': '*',
+	      'Content-Type': 'application/json',
+	      'Authorization': "Bearer " + token,
+	      "Accept": "application/json"
+	    }
+	  };
+
+	  var request = _axios2.default.get(apiServer + "/LS360ApiGateway/services/rest/jwt/validate", config);
+
+	  return {
+	    type: _types.TOKEN_VERIFICATION,
+	    payload: request
+	  };
+	}
+
 /***/ },
-/* 559 */
+/* 561 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(560);
+	module.exports = __webpack_require__(562);
 
 /***/ },
-/* 560 */
+/* 562 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(561);
-	var utils = __webpack_require__(562);
-	var dispatchRequest = __webpack_require__(563);
-	var InterceptorManager = __webpack_require__(572);
-	var isAbsoluteURL = __webpack_require__(573);
-	var combineURLs = __webpack_require__(574);
-	var bind = __webpack_require__(575);
-	var transformData = __webpack_require__(567);
+	var defaults = __webpack_require__(563);
+	var utils = __webpack_require__(564);
+	var dispatchRequest = __webpack_require__(565);
+	var InterceptorManager = __webpack_require__(574);
+	var isAbsoluteURL = __webpack_require__(575);
+	var combineURLs = __webpack_require__(576);
+	var bind = __webpack_require__(577);
+	var transformData = __webpack_require__(569);
 
 	function Axios(defaultConfig) {
 	  this.defaults = utils.merge({}, defaultConfig);
@@ -36232,7 +36379,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(576);
+	axios.spread = __webpack_require__(578);
 
 	// Provide aliases for supported request methods
 	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
@@ -36260,12 +36407,12 @@
 
 
 /***/ },
-/* 561 */
+/* 563 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(562);
+	var utils = __webpack_require__(564);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -36332,7 +36479,7 @@
 
 
 /***/ },
-/* 562 */
+/* 564 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -36604,7 +36751,7 @@
 
 
 /***/ },
-/* 563 */
+/* 565 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -36626,10 +36773,10 @@
 	        adapter = config.adapter;
 	      } else if (typeof XMLHttpRequest !== 'undefined') {
 	        // For browsers use XHR adapter
-	        adapter = __webpack_require__(564);
+	        adapter = __webpack_require__(566);
 	      } else if (typeof process !== 'undefined') {
 	        // For node use HTTP adapter
-	        adapter = __webpack_require__(564);
+	        adapter = __webpack_require__(566);
 	      }
 
 	      if (typeof adapter === 'function') {
@@ -36645,18 +36792,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 564 */
+/* 566 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(562);
-	var buildURL = __webpack_require__(565);
-	var parseHeaders = __webpack_require__(566);
-	var transformData = __webpack_require__(567);
-	var isURLSameOrigin = __webpack_require__(568);
-	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(569);
-	var settle = __webpack_require__(570);
+	var utils = __webpack_require__(564);
+	var buildURL = __webpack_require__(567);
+	var parseHeaders = __webpack_require__(568);
+	var transformData = __webpack_require__(569);
+	var isURLSameOrigin = __webpack_require__(570);
+	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(571);
+	var settle = __webpack_require__(572);
 
 	module.exports = function xhrAdapter(resolve, reject, config) {
 	  var requestData = config.data;
@@ -36753,7 +36900,7 @@
 	  // This is only done if running in a standard browser environment.
 	  // Specifically not if we're in a web worker, or react-native.
 	  if (utils.isStandardBrowserEnv()) {
-	    var cookies = __webpack_require__(571);
+	    var cookies = __webpack_require__(573);
 
 	    // Add xsrf header
 	    var xsrfValue = config.withCredentials || isURLSameOrigin(config.url) ?
@@ -36814,12 +36961,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 565 */
+/* 567 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(562);
+	var utils = __webpack_require__(564);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -36887,12 +37034,12 @@
 
 
 /***/ },
-/* 566 */
+/* 568 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(562);
+	var utils = __webpack_require__(564);
 
 	/**
 	 * Parse headers into an object
@@ -36930,12 +37077,12 @@
 
 
 /***/ },
-/* 567 */
+/* 569 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(562);
+	var utils = __webpack_require__(564);
 
 	/**
 	 * Transform the data for a request or a response
@@ -36956,12 +37103,12 @@
 
 
 /***/ },
-/* 568 */
+/* 570 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(562);
+	var utils = __webpack_require__(564);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -37030,7 +37177,7 @@
 
 
 /***/ },
-/* 569 */
+/* 571 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37072,7 +37219,7 @@
 
 
 /***/ },
-/* 570 */
+/* 572 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37096,12 +37243,12 @@
 
 
 /***/ },
-/* 571 */
+/* 573 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(562);
+	var utils = __webpack_require__(564);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -37155,12 +37302,12 @@
 
 
 /***/ },
-/* 572 */
+/* 574 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(562);
+	var utils = __webpack_require__(564);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -37213,7 +37360,7 @@
 
 
 /***/ },
-/* 573 */
+/* 575 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37233,7 +37380,7 @@
 
 
 /***/ },
-/* 574 */
+/* 576 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37251,7 +37398,7 @@
 
 
 /***/ },
-/* 575 */
+/* 577 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37268,7 +37415,7 @@
 
 
 /***/ },
-/* 576 */
+/* 578 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37301,7 +37448,7 @@
 
 
 /***/ },
-/* 577 */
+/* 579 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37320,7 +37467,7 @@
 
 	var _reactRedux = __webpack_require__(456);
 
-	var _actions = __webpack_require__(558);
+	var _actions = __webpack_require__(560);
 
 	var actions = _interopRequireWildcard(_actions);
 
@@ -37422,7 +37569,7 @@
 	exports.default = (0, _reactRedux.connect)(mapState, actions)(Header);
 
 /***/ },
-/* 578 */
+/* 580 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37441,7 +37588,7 @@
 
 	var _reactRedux = __webpack_require__(456);
 
-	var _actions = __webpack_require__(558);
+	var _actions = __webpack_require__(560);
 
 	var actions = _interopRequireWildcard(_actions);
 
@@ -37576,7 +37723,7 @@
 	exports.default = (0, _reactRedux.connect)(mapState, actions)(LeftMenu);
 
 /***/ },
-/* 579 */
+/* 581 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37640,7 +37787,7 @@
 	exports.default = (0, _reactRedux.connect)(mapState)(ToolTip);
 
 /***/ },
-/* 580 */
+/* 582 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37648,6 +37795,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -37657,11 +37806,11 @@
 
 	var _reactRedux = __webpack_require__(456);
 
-	var _actions = __webpack_require__(558);
+	var _actions = __webpack_require__(560);
 
 	var actions = _interopRequireWildcard(_actions);
 
-	var _externalHtml = __webpack_require__(581);
+	var _externalHtml = __webpack_require__(583);
 
 	var _externalHtml2 = _interopRequireDefault(_externalHtml);
 
@@ -37713,11 +37862,17 @@
 	    key: 'createBody',
 	    value: function createBody() {
 	      if (typeof this.props.modal.body != "undefined") {
-	        if (typeof this.props.modal.body.src == "undefined") {
+	        if (_typeof(this.props.modal.body) == "object") {
+	          return _react2.default.createElement(
+	            'div',
+	            null,
+	            this.props.modal.body
+	          );
+	        } else if (typeof this.props.modal.body == "string") {
 	          return _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: this.props.modal.body } });
-	        } else {
-	          return _react2.default.createElement(_externalHtml2.default, { iframe: 'iframe', src: this.props.modal.body.src });
 	        }
+	      } else if (typeof this.props.modal.src != "undefined") {
+	        return _react2.default.createElement(_externalHtml2.default, { iframe: 'iframe', src: this.props.modal.src });
 	      }
 	    }
 	  }, {
@@ -37803,10 +37958,10 @@
 	exports.default = (0, _reactRedux.connect)(mapState, actions)(Modal);
 
 /***/ },
-/* 581 */
+/* 583 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -37836,10 +37991,10 @@
 	  }
 
 	  _createClass(ExternalHtml, [{
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      var Iframe = this.props.iframe;
-	      return _react2.default.createElement(Iframe, { src: this.props.src, height: this.props.height, width: this.props.width });
+	      return _react2.default.createElement(Iframe, { src: this.props.src, height: "100%", width: "100%" });
 	    }
 	  }]);
 
@@ -37849,7 +38004,7 @@
 	exports.default = ExternalHtml;
 
 /***/ },
-/* 582 */
+/* 584 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37868,11 +38023,11 @@
 
 	var _reactRedux = __webpack_require__(456);
 
-	var _actions = __webpack_require__(558);
+	var _actions = __webpack_require__(560);
 
 	var actions = _interopRequireWildcard(_actions);
 
-	var _inputField = __webpack_require__(583);
+	var _inputField = __webpack_require__(585);
 
 	var _inputField2 = _interopRequireDefault(_inputField);
 
@@ -38161,7 +38316,7 @@
 	exports.default = (0, _reactRedux.connect)(mapState, actions)(Login);
 
 /***/ },
-/* 583 */
+/* 585 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38250,10 +38405,10 @@
 	exports.default = InputField;
 
 /***/ },
-/* 584 */
+/* 586 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -38264,14 +38419,6 @@
 	var _react = __webpack_require__(299);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(456);
-
-	var _actions = __webpack_require__(558);
-
-	var actions = _interopRequireWildcard(_actions);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38291,20 +38438,20 @@
 	  }
 
 	  _createClass(Logout, [{
-	    key: 'componentWillMount',
+	    key: "componentWillMount",
 	    value: function componentWillMount() {
-	      this.props.authentication(false);
-	      this.props.clearState("COURSE_COUNTERS");
-	      this.props.clearState("FETCH_BRAND");
+	      //this.props.authentication(false);
+	      //this.props.clearState("COURSE_COUNTERS");
+	      //this.props.clearState("FETCH_BRAND");
 	      sessionStorage.removeItem("auth");
 	      sessionStorage.removeItem("userName");
 	      sessionStorage.removeItem("leftMenu");
 	      this.context.router.push("/LS360Dashboard/login");
 	    }
 	  }, {
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
-	      return _react2.default.createElement('div', null);
+	      return _react2.default.createElement("div", null);
 	    }
 	  }]);
 
@@ -38314,16 +38461,80 @@
 	Logout.contextTypes = {
 	  router: _react2.default.PropTypes.object
 	};
+	exports.default = Logout;
+
+/***/ },
+/* 587 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(456);
+
+	var _actions = __webpack_require__(560);
+
+	var actions = _interopRequireWildcard(_actions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Token = function (_Component) {
+	  _inherits(Token, _Component);
+
+	  function Token() {
+	    _classCallCheck(this, Token);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Token).apply(this, arguments));
+	  }
+
+	  _createClass(Token, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var token = window.location.search;
+	      var l = token.length - 1;
+	      token = String(token).substr(1, l);
+	      this.props.tokenVerify(token);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('div', null);
+	    }
+	  }]);
+
+	  return Token;
+	}(_react.Component);
+
+	Token.contextTypes = {
+	  router: _react2.default.PropTypes.object
+	};
 
 
 	function mapState(state) {
-	  return {};
+	  return { verify: state.tokenVerification };
 	}
 
-	exports.default = (0, _reactRedux.connect)(mapState, actions)(Logout);
+	exports.default = (0, _reactRedux.connect)(mapState, actions)(Token);
 
 /***/ },
-/* 585 */
+/* 588 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38372,7 +38583,7 @@
 	exports.default = AccountInfo;
 
 /***/ },
-/* 586 */
+/* 589 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38421,7 +38632,7 @@
 	exports.default = AddressBook;
 
 /***/ },
-/* 587 */
+/* 590 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38470,7 +38681,7 @@
 	exports.default = Billing;
 
 /***/ },
-/* 588 */
+/* 591 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38519,7 +38730,7 @@
 	exports.default = BrowseFreeCourses;
 
 /***/ },
-/* 589 */
+/* 592 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38568,7 +38779,7 @@
 	exports.default = CourseReport;
 
 /***/ },
-/* 590 */
+/* 593 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38585,11 +38796,11 @@
 
 	var _reactRedux = __webpack_require__(456);
 
-	var _actions = __webpack_require__(558);
+	var _actions = __webpack_require__(560);
 
 	var actions = _interopRequireWildcard(_actions);
 
-	var _isotopeContainer = __webpack_require__(591);
+	var _isotopeContainer = __webpack_require__(594);
 
 	var _isotopeContainer2 = _interopRequireDefault(_isotopeContainer);
 
@@ -38615,11 +38826,15 @@
 	  _createClass(Courses, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      this.props.clearState("COURSE_COUNTERS");
 	      this.props.courseCounters();
 	      this.state = {
 	        "apiStatus": 0
 	      };
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.props.clearState("COURSE_COUNTERS");
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
@@ -38737,7 +38952,7 @@
 	exports.default = (0, _reactRedux.connect)(mapState, actions)(Courses);
 
 /***/ },
-/* 591 */
+/* 594 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38752,7 +38967,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _isotopeContent = __webpack_require__(592);
+	var _isotopeContent = __webpack_require__(595);
 
 	var _isotopeContent2 = _interopRequireDefault(_isotopeContent);
 
@@ -38973,7 +39188,7 @@
 	exports.default = IsoContainer;
 
 /***/ },
-/* 592 */
+/* 595 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38988,15 +39203,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(455);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
 	var _reactRedux = __webpack_require__(456);
 
-	var _actions = __webpack_require__(558);
+	var _actions = __webpack_require__(560);
 
 	var actions = _interopRequireWildcard(_actions);
+
+	var _courseDetail = __webpack_require__(596);
+
+	var _courseDetail2 = _interopRequireDefault(_courseDetail);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -39007,6 +39222,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	//import ReactDOM from 'react-dom';
+
 
 	var IsoContent = function (_Component) {
 	  _inherits(IsoContent, _Component);
@@ -39025,23 +39242,28 @@
 	  }, {
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      this.props.clearState("ISOTOPE");
 	      this.props.getIsotope();
 	      this.state = {
 	        "isLoading": true,
-	        "isFirstTime": true,
+	        //"isFirstTime":true,
 	        "list": []
 	      };
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.props.clearState("ISOTOPE");
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
 	      this.setState({ "list": this.state.list.concat(nextProps.isotope) });
 
-	      if (!this.state.isFirstTime) {
+	      //if(!this.state.isFirstTime)
+	      {
 	        this.setState({ "isLoading": false });
 	      }
-	      this.setState({ "isFirstTime": false });
+	      //this.setState({"isFirstTime":false});
 	    }
 	  }, {
 	    key: 'checkAPIStatus',
@@ -39057,21 +39279,23 @@
 	  }, {
 	    key: 'image',
 	    value: function image(data) {
-	      var path = data.courseImage;
-	      if (path == "" || path == "null" || path == null) {
+	      var img = data.courseImage;
+	      if (img == "" || img == "null" || img == null) {
 	        switch (data.courseType) {
 	          case "Online Course":
-	            path = "resources/assets/img/default-online.jpg";
+	            img = "online";
 	            break;
 	          case "Classroom Course":
-	            path = "resources/assets/img/default-classroom.jpg";
+	            img = "classroom";
 	            break;
 	          case "Webinar Course":
-	            path = "resources/assets/img/default-webinar.jpg";
+	            img = "webinar";
 	            break;
 	        }
+	        return _react2.default.createElement('div', { className: "iso-image " + img });
+	      } else {
+	        return _react2.default.createElement('div', { className: 'iso-image', style: { backgroundImage: 'url(' + img + ')' } });
 	      }
-	      return _react2.default.createElement('div', { className: 'iso-image', style: { backgroundImage: 'url(' + path + ')' } });
 	    }
 	  }, {
 	    key: 'dateConverion',
@@ -39103,6 +39327,23 @@
 
 	      switch (data.courseType) {
 	        case "Online Course":
+
+	          //  Locked
+	          if (data.isLocked) {
+	            return _react2.default.createElement('a', { onClick: function onClick() {
+	                return _this2.props.getModal({
+	                  "visible": true,
+	                  "title": "Your Course Is Locked",
+	                  "body": "<div class='left-icon locked'>This course is locked. Courses are generally locked due to too many attempts to pass an exam or quiz, or an action in regulated courses such as exiting the screen while playing the course. For assistance with locked courses, please see our <a href='#' class='u-anchor' target='_blank'>support forum</a> to contact technical support.</div>",
+	                  "size": "modal-md"
+	                });
+	              },
+	              href: 'javascript:;',
+	              title: 'Your Course Is Locked',
+	              className: 'iso-main-btn locked' });
+	          }
+
+	          //  Expire
 	          if (data.isExpired) {
 	            return _react2.default.createElement('a', { onClick: function onClick() {
 	                return _this2.props.getModal({
@@ -39115,6 +39356,11 @@
 	              href: 'javascript:;',
 	              title: 'This Course Has Expired',
 	              className: 'iso-main-btn expired' });
+	          }
+
+	          //  Launch Course
+	          if (!data.isExpired && !data.isLocked && (data.courseStatus == "inprogress" || data.courseStatus == "notstarted")) {
+	            return _react2.default.createElement('a', { href: 'javascript:;', title: 'Course Launch', className: 'iso-main-btn play' });
 	          }
 	          break;
 	        case "Classroom Course":
@@ -39142,7 +39388,7 @@
 	  }, {
 	    key: 'progressBar',
 	    value: function progressBar(data) {
-	      if (data.isExpired) {
+	      if (data.isExpired || data.isLocked) {
 	        return _react2.default.createElement(
 	          'div',
 	          { className: 'iso-progress-bar' },
@@ -39160,7 +39406,7 @@
 	  }, {
 	    key: 'timeSpent',
 	    value: function timeSpent(data) {
-	      if (data.courseStatus != "completed" && !data.isExpired) {
+	      if (data.courseStatus != "completed" && !data.isExpired && !data.isLocked) {
 	        return _react2.default.createElement(
 	          'div',
 	          { className: 'iso-time-take' },
@@ -39173,6 +39419,13 @@
 	    value: function courseStatus(data) {
 	      switch (data.courseType) {
 	        case "Online Course":
+	          if (data.isLocked) {
+	            return _react2.default.createElement(
+	              'div',
+	              { className: 'iso-status' },
+	              'Locked'
+	            );
+	          }
 	          if (data.isExpired) {
 	            return _react2.default.createElement(
 	              'div',
@@ -39232,74 +39485,106 @@
 	    value: function bottomBtns(data) {
 	      var _this3 = this;
 
+	      var btns = [];
 	      switch (data.courseType) {
 	        case "Online Course":
-	          if (data.isExpired) {
-	            return _react2.default.createElement(
-	              'div',
-	              { className: 'iso-bottom-options' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'iso-icons' },
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'info-icon', href: 'javascript:void(0);' },
-	                  'info'
-	                )
-	              )
-	            );
-	          } else if (data.isExpireSoon) {
-	            return _react2.default.createElement(
-	              'div',
-	              { className: 'iso-bottom-options' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'iso-icons' },
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'play-icon', href: 'javascript:void(0);' },
-	                  'play'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'info-icon', href: 'javascript:void(0);' },
-	                  'info'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'expire-soon-icon pull-right', href: 'javascript:void(0);', title: 'This Course Is Expiring',
-	                    onClick: function onClick() {
-	                      return _this3.props.getModal({
-	                        "visible": true,
-	                        "title": "This Course Is Expiring",
-	                        "body": "<div class='left-icon expire-soon'>Please note that this course will be expiring on <span class='text-red'>" + _this3.dateConverion(data.expiryDate, true) + "</span>. In order to have full access and pass this course, you must finish it before it expires. Expired courses prior to completion means you will have to re-enroll.</div>",
-	                        "size": "modal-md"
-	                      });
-	                    } },
-	                  'expire soon'
-	                )
-	              )
-	            );
-	          } else {
-	            return _react2.default.createElement(
-	              'div',
-	              { className: 'iso-bottom-options' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'iso-icons' },
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'play-icon', href: 'javascript:void(0);' },
-	                  'play'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'info-icon', href: 'javascript:void(0);' },
-	                  'info'
-	                )
-	              )
-	            );
+
+	          //  Launch Course
+	          if (!data.isExpired && !data.isLocked && (data.courseStatus == "inprogress" || data.courseStatus == "notstarted")) {
+	            btns.push(_react2.default.createElement(
+	              'a',
+	              { key: '1', className: 'play-icon', title: 'Course Launch', href: 'javascript:void(0);' },
+	              'play'
+	            ));
 	          }
+
+	          // Course Details
+	          if (!data.isLocked) {
+	            btns.push(_react2.default.createElement(
+	              'a',
+	              { key: '2', className: 'info-icon', href: 'javascript:void(0);', title: 'Course Details',
+	                onClick: function onClick() {
+	                  return _this3.props.getModal({
+	                    "visible": true,
+	                    "title": "About Your Course",
+	                    "body": _react2.default.createElement(_courseDetail2.default, { eId: data.enrollmentId }),
+	                    "size": "modal-md"
+	                  });
+	                } },
+	              'info'
+	            ));
+	          }
+
+	          //  Expire Soon
+	          if (data.isExpireSoon) {
+	            btns.push(_react2.default.createElement(
+	              'a',
+	              { key: '3', className: 'expire-soon-icon pull-right', href: 'javascript:void(0);', title: 'This Course Is Expiring',
+	                onClick: function onClick() {
+	                  return _this3.props.getModal({
+	                    "visible": true,
+	                    "title": "This Course Is Expiring",
+	                    "body": "<div class='left-icon expire-soon'>Please note that this course will be expiring on <span class='text-red'>" + _this3.dateConverion(data.expiryDate, true) + "</span>. In order to have full access and pass this course, you must finish it before it expires. Expired courses prior to completion means you will have to re-enroll.</div>",
+	                    "size": "modal-md"
+	                  });
+	                } },
+	              'expire soon'
+	            ));
+	          }
+
+	          //  View Assessment
+	          if (data.viewAssessmentURI != "" && !data.isLocked) {
+	            btns.push(_react2.default.createElement(
+	              'a',
+	              { key: '4', className: 'view-assessment-icon', href: 'javascript:void(0);', title: 'View Assessment',
+	                onClick: function onClick() {
+	                  return _this3.props.getModal({
+	                    "visible": true,
+	                    "title": "View Assessment",
+	                    "src": data.viewAssessmentURI,
+	                    "size": "modal-md"
+	                  });
+	                } },
+	              'view'
+	            ));
+	          }
+
+	          //  Locked
+	          if (data.isLocked) {
+	            btns.push(_react2.default.createElement(
+	              'a',
+	              { key: '5', className: 'locked-icon', href: 'javascript:void(0);', title: 'Your Course Is Locked',
+	                onClick: function onClick() {
+	                  return _this3.props.getModal({
+	                    "visible": true,
+	                    "title": "Your Course Is Locked",
+	                    "body": "<div class='left-icon locked'>This course is locked. Courses are generally locked due to too many attempts to pass an exam or quiz, or an action in regulated courses such as exiting the screen while playing the course. For assistance with locked courses, please see our <a href='#' class='u-anchor' target='_blank'>support forum</a> to contact technical support.</div>",
+	                    "size": "modal-md"
+	                  });
+	                } },
+	              'locked'
+	            ));
+	          }
+
+	          //  Certificate
+	          if (data.certificateURI != "" && data.certificateURI != null && data.courseStatus == "completed") {
+	            btns.push(_react2.default.createElement(
+	              'a',
+	              { key: '6', className: 'certificate-icon pull-right', href: data.certificateURI, target: '_blank', title: 'Certificate' },
+	              'certificate'
+	            ));
+	          }
+
+	          return _react2.default.createElement(
+	            'div',
+	            { className: 'iso-bottom-options' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'iso-icons' },
+	              btns
+	            )
+	          );
+
 	          break;
 	        case "Classroom Course":
 	          return _react2.default.createElement(
@@ -39385,19 +39670,34 @@
 	  }, {
 	    key: 'isExpiredOrSoon',
 	    value: function isExpiredOrSoon(currentDate, expDate) {
-	      //currentDate = "2016-07-11";
-	      //expDate = "2016-07-22";
+	      //currentDate = "2016-08-11T23:59:59";
 	      var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 	      currentDate = new Date(currentDate);
 	      expDate = new Date(expDate);
 	      var diffDays = Math.round((currentDate.getTime() - expDate.getTime()) / oneDay);
-	      //console.log(diffDays, diffDays >= -10, diffDays >= 0);
-	      return [diffDays >= 0, diffDays >= -10];
+	      var arr = [diffDays > 0, diffDays > -10]; // expired, soon
+	      if (arr[0]) {
+	        arr[1] = false;
+	      }
+	      //console.log(diffDays, arr);
+	      return arr;
 	    }
 	  }, {
 	    key: 'box',
 	    value: function box(data, i) {
-	      var cData = this.isExpiredOrSoon(this.props.currentDate, data.expiryDate);
+	      //  For Testing
+	      //data.viewAssessmentURI = "https://player.360training.com/ICP4/ViewAssessmentResult.aspx?enrollmentId=10119745";
+	      //data.enrollmentId = 10119745;
+	      //data.isLocked = true;
+	      //data.courseProgress = 10;
+	      //data.certificateURI = "http://www.360training.com";
+	      //data.expiryDate = "2016-08-22T23:59:59";
+	      //console.log(data);
+
+	      var cData = [false, false];
+	      if (!data.isLocked && (data.courseStatus == "notstarted" || data.courseStatus == "inprogress")) {
+	        cData = this.isExpiredOrSoon(this.props.currentDate, data.expiryDate);
+	      }
 	      data.isExpired = cData[0];
 	      data.isExpireSoon = cData[1];
 
@@ -39449,7 +39749,379 @@
 	exports.default = (0, _reactRedux.connect)(mapStatToProps, actions)(IsoContent);
 
 /***/ },
-/* 593 */
+/* 596 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(456);
+
+	var _actions = __webpack_require__(560);
+
+	var actions = _interopRequireWildcard(_actions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	//import ReactDOM from 'react-dom';
+
+
+	var CourseDetail = function (_Component) {
+	    _inherits(CourseDetail, _Component);
+
+	    function CourseDetail() {
+	        _classCallCheck(this, CourseDetail);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(CourseDetail).apply(this, arguments));
+	    }
+
+	    _createClass(CourseDetail, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            this.props.getCourseDetail(this.props.eId);
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            this.props.clearState("COURSE_DETAIL");
+	        }
+	    }, {
+	        key: 'dateConverion',
+	        value: function dateConverion(stamp, withTime) {
+	            if (stamp != null) {
+	                stamp = stamp.split("T");
+	                var sDate = String(stamp[0]).split("-");
+	                sDate = sDate[1] + "/" + sDate[2] + "/" + sDate[0];
+
+	                if (!withTime) {
+	                    return sDate;
+	                }
+
+	                var ext;
+	                var sTime = String(stamp[1]).split(":");
+	                if (sTime[0] < 12) {
+	                    sTime[0] == 0 ? sTime[0] = 12 : "";
+	                    ext = "AM";
+	                } else {
+	                    ext = "PM";
+	                    sTime[0] >= 13 ? sTime[0] = sTime[0] - 12 : "";
+	                }
+	                sTime = sTime[0] + ":" + sTime[1];
+	                return sDate + " " + sTime + " " + ext + " CST";
+	            }
+	            return "-";
+	        }
+	    }, {
+	        key: 'txtConverion',
+	        value: function txtConverion(val, cond, ret) {
+	            if (val != cond) {
+	                return val;
+	            }
+	            return ret;
+	        }
+	    }, {
+	        key: 'dateInSecintoHrMin',
+	        value: function dateInSecintoHrMin(sec) {
+	            //var totalSec = new Date().getTime() / 1000;
+	            var totalSec = parseInt(sec);
+	            var hours = parseInt(totalSec / 3600);
+	            var minutes = parseInt(totalSec / 60) % 60;
+	            var seconds = totalSec % 60;
+	            var result = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes);
+
+	            return result;
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            if (typeof this.props.courseDetail[0] != "undefined") {
+	                return _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement(
+	                        'table',
+	                        { className: 'table table-striped course-detail' },
+	                        _react2.default.createElement(
+	                            'thead',
+	                            null,
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'th',
+	                                    null,
+	                                    'Statistics'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'th',
+	                                    null,
+	                                    'Status'
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'tbody',
+	                            null,
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Status'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.txtConverion(this.props.courseDetail[0].status, null, "-")
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Course Progress'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.props.courseDetail[0].percentComplete + "%"
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'First Access Date'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.dateConverion(this.props.courseDetail[0].firstAccessDate, true)
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Last Access Date'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.dateConverion(this.props.courseDetail[0].lastAccessDate, true)
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Total Number of Accesses'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.props.courseDetail[0].launchesOccrued
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Pre Assessment Score'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.txtConverion(this.props.courseDetail[0].pretestScore + "%", "-1%", "-")
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Average Quiz Score'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.txtConverion(this.props.courseDetail[0].averageQuizScore, 0, "-")
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Lowest Quiz Score'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.txtConverion(this.props.courseDetail[0].lowestQuizScore + "%", "-1%", "-")
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Highest Quiz Score'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.txtConverion(this.props.courseDetail[0].highestQuizScore + "%", 0, "-")
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Total Number of Quizes Attempted'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.txtConverion(this.props.courseDetail[0].numberQuizesTaken, 0, "-")
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Average Post Test Score'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.txtConverion(this.props.courseDetail[0].averagePostTestScore + "%", 0, "-")
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Lowest Post Score'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.txtConverion(this.props.courseDetail[0].lowestPostTestScore + "%", "-1%", "-")
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Highest Post Test Score'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.txtConverion(this.props.courseDetail[0].highestPostTestScore + "%", 0, "-")
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Total Number of Post Test Attempted'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.txtConverion(this.props.courseDetail[0].numberPostTestsTaken, 0, "-")
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Completion Date'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.dateConverion(this.props.courseDetail[0].completionDate, true)
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Total Time Spent in Course (hours:minutes)'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    this.dateInSecintoHrMin(this.props.courseDetail[0].totalTimeInSeconds)
+	                                )
+	                            )
+	                        )
+	                    )
+	                );
+	            } else {
+	                return _react2.default.createElement('div', null);
+	            }
+	        }
+	    }]);
+
+	    return CourseDetail;
+	}(_react.Component);
+
+	function mapStatToProps(state) {
+	    return { "courseDetail": state.courseDetail };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStatToProps, actions)(CourseDetail);
+
+/***/ },
+/* 597 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39498,7 +40170,7 @@
 	exports.default = CreateCourse;
 
 /***/ },
-/* 594 */
+/* 598 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39547,7 +40219,7 @@
 	exports.default = EnrollUsers;
 
 /***/ },
-/* 595 */
+/* 599 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39596,7 +40268,7 @@
 	exports.default = ManageUsers;
 
 /***/ },
-/* 596 */
+/* 600 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39645,7 +40317,7 @@
 	exports.default = Orders;
 
 /***/ },
-/* 597 */
+/* 601 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39694,7 +40366,7 @@
 	exports.default = PrivacyPolicy;
 
 /***/ },
-/* 598 */
+/* 602 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39743,7 +40415,7 @@
 	exports.default = RunReport;
 
 /***/ },
-/* 599 */
+/* 603 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39792,7 +40464,7 @@
 	exports.default = Shop;
 
 /***/ },
-/* 600 */
+/* 604 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39841,7 +40513,7 @@
 	exports.default = Subscriptions;
 
 /***/ },
-/* 601 */
+/* 605 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39890,7 +40562,7 @@
 	exports.default = Support;
 
 /***/ },
-/* 602 */
+/* 606 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39939,7 +40611,7 @@
 	exports.default = Terms;
 
 /***/ },
-/* 603 */
+/* 607 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

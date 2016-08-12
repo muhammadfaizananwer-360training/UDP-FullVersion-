@@ -1,23 +1,24 @@
 /* load Open Sans Font from local */
 @import url(../fonts/font.css);
 
+.table>thead>tr>th{ background-color: #4d4d4d; color: #fff;}
+.table-striped>tbody>tr:nth-of-type(odd){background-color: #f5faff; color: #0280D4;}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{border-top: 1px solid #f0f1f3; text-transform: capitalize;}
+
 .vertical-alignment-helper {
     display:table;
     height: 100%;
     width: 100%;
-    pointer-events:none; /* This makes sure that we can still click outside of the modal to close it */
+    pointer-events:none;
 }
 .vertical-align-center {
-    /* To center vertically */
     display: table-cell;
     vertical-align: middle;
     pointer-events:none;
 }
 .modal-content {
-    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
     width:inherit;
     height:inherit;
-    /* To center horizontally */
     margin: 0 auto;
     pointer-events: all;
 }
@@ -25,18 +26,23 @@
 iframe{
 	border: 0;
   width: 100%;
-  margin-left: 20px;
 }
 
 .text-red{
 	color: #d0021b !important;
+}
+.blue-text{
+	color: #0280D4;
+}
+.u-anchor{
+  color: #0280D4;
+  text-decoration: underline;
 }
 
 .modal-body .left-icon{
 	margin-left: 80px;
 	font-size: 13px;
 }
-
 .modal-body .left-icon::before{
 	content: "";
 	background-position: center center;
@@ -47,12 +53,14 @@ iframe{
   left: 30px;
   top: 20px;
 }
-
 .modal-body .left-icon.expired::before{
 	background-image:url("../img/icons/exclamation.svg");
 }
 .modal-body .left-icon.expire-soon::before{
 	background-image:url("../img/icons/exclamation-red.svg");
+}
+.modal-body .left-icon.locked::before{
+	background-image:url("../img/icons/lock.svg");
 }
 .modal-header .close{
 	background-image: url("../img/icons/close.svg");
@@ -67,12 +75,10 @@ iframe{
 .animated-input{
 	position: relative;
 }
-
 .animated-input.up > .form-control{border-color: #0280d4}
 .animated-input.up > .form-control::-webkit-input-placeholder{color:#fff !important}
 .animated-input.up > .form-control:-ms-input-placeholder{color:#fff !important}
 .animated-input.up > .form-control::-moz-placeholder{color:#fff !important}
-
 .animated-input::before{
 	content: attr(data-placeholder);
 	position: absolute;
@@ -86,13 +92,11 @@ iframe{
   -o-transition: all 0.3s ease !important;
   transition: all 0.3s ease !important;
 }
-
 .animated-input.up::before{
 	top: -10px;
   background-color: #fff;
 	color: #0280d4;
 }
-
 .animated-input.error > .form-control{border-color: #d0021b}
 .animated-input.error > .form-control::-webkit-input-placeholder{color:#fff !important}
 .animated-input.error > .form-control:-ms-input-placeholder{color:#fff !important}
@@ -112,7 +116,6 @@ iframe{
 .scene-option.radio{
 	margin-bottom: 10px !important;
 }
-
 .scene-option.checkbox span,
 .scene-option.radio span{
 	display: inline-block;
@@ -121,7 +124,6 @@ iframe{
 	z-index: 1;
 	font-size: 13px;
 }
-
 .scene-option.checkbox span::before,
 .scene-option.radio span::before {
 	content: "";
@@ -134,7 +136,6 @@ iframe{
 	border: 2px solid #bac2c7;
 	background-color: #fff;
 }
-
 .scene-option.checkbox span::after,
 .scene-option.radio span::after {
 	display: inline-block;
@@ -146,35 +147,29 @@ iframe{
   margin-left: -15px;
   padding-left: 3px;
 }
-
 .scene-option.checkbox input[type="checkbox"],
 .scene-option.radio input[type="radio"]{
 	opacity: 0;
 }
-
 .scene-option.checkbox input[type="checkbox"]:checked + span::after,
 .scene-option.radio input[type="radio"]:checked + span::after {
 	font-family: "Glyphicons Halflings";
 	content: "\e013";
 	color: #0280D4;
 }
-
 .scene-option.checkbox input[type="checkbox"]:checked + span::before,
 .scene-option.radio input[type="radio"]:checked + span::before {
   background-color: #fff;
 }
-
 .scene-option.checkbox input[type="checkbox"]:disabled + span,
 .scene-option.radio input[type="radio"]:disabled + span {
 	opacity: 0.65;
 }
-
 .scene-option.checkbox input[type="checkbox"]:disabled + span::before
 .scene-option.radio input[type="radio"]:disabled + span::before {
 	background-color: #eeeeee;
 	cursor: not-allowed;
 }
-
 .scene-option.radio span::before {
 	border-radius: 50%;
 }
@@ -184,7 +179,6 @@ iframe{
 	overflow: hidden;
 	padding-left: 30px;
 }
-
 .btn.in-icon::after{
 	content:"";
 	background-image:url("../img/icons/linkedin-symbol.svg");
@@ -197,14 +191,12 @@ iframe{
   bottom: 0;
   left: 8px;
 }
-
 .btn.fb-icon{
 	text-overflow: ellipsis;
 	overflow: hidden;
 	padding-left: 30px;
 	background-color: #0a5891;
 }
-
 .btn.fb-icon::after{
 	content:"";
 	background-image:url("../img/icons/facebook-symbol.svg");
@@ -217,7 +209,6 @@ iframe{
   bottom: 0;
   left: 6px;
 }
-
 .pre-loader.full{
 	position: fixed !important;
 	left: 0;
@@ -225,12 +216,10 @@ iframe{
 	top: 0;
 	bottom: 0;
 }
-
 .pre-loader{
 	position: relative;
 	min-height: 80px;
 }
-
 .pre-loader::after{
 	content:"";
 	background-image:url("../img/ring-alt.svg");
@@ -250,7 +239,6 @@ iframe{
 	background-color: #fff;
   border-radius: 50%;
 }
-
 .pre-loader::before{
 	content:"";
 	position: absolute;
@@ -262,7 +250,6 @@ iframe{
 	background-color: #fff;
 	opacity: 0.9;
 }
-
 .login-form{
 	max-width: 600px;
   margin: auto;
@@ -277,44 +264,35 @@ iframe{
   background-color: #fff;
 	padding: 30px 30px 10px 30px;
 }
-
 .login-form h2{
 	margin-bottom: 30px;
 }
-
 .login-form .btn-group-justified .btn-group-lg{
 	padding: 0 8px;
 }
-
 .login-form .form-group.has-error{
 	text-align: left;
 }
-
 .login-form .side-balance{
 	margin-left: 10px;
 	margin-right: 10px;
 }
-
 .login-form .go-right::after{
 	content: "|";
 	position: relative;
   padding-left: 10px;
   color: #8f8f8f;
 }
-
 .login-form .go-right{
 	text-align: right;
 }
-
 .login-form .list-inline{
 	margin-right: 48px;
 	font-size: 13px;
 }
-
 .login-form .go-left{
 	text-align: left;
 }
-
 *:focus {
 	outline: none !important;
 	text-decoration: none !important;
@@ -331,7 +309,6 @@ iframe{
 	top: 80px;
 }
 
-
 .navbar-fixed-top {
 	box-shadow: 4px 4px 5px rgba(186,194,199,0.5);
 	border-style: solid;
@@ -342,9 +319,6 @@ iframe{
 .navbar-fixed-top{
 	height:80px;
 	padding: 0 5px;
-}
-.blue-text{
-	color: #0280D4;
 }
 .navbar-fixed-top .brand{
 	background-image: url('../img/logo.svg');
@@ -635,13 +609,9 @@ iframe{
 .sidebar .heading{
 	color: #BAC2C7;
 	padding-bottom: 10px;
+  font-weight: 400;
+  font-size: 25px;
 }
-
-.sidebar .heading{
-	font-weight: 400;
-	font-size: 25px;
-}
-
 .sidebar .heading::before{
 	content:"";
 	background-image:url("../img/icons/dashboard.svg");
@@ -689,8 +659,6 @@ iframe{
 .no-touch .sidebar .collapse-btn:hover{
 	background-color: #444;
 }
-
-
 .left-toggle .sidebar .panel-collapse{
 	display:none;
 }
@@ -760,7 +728,6 @@ iframe{
 	font-weight: 300;
 	margin-top: 0;
 }
-
 .tooltip{
 	position: fixed;
 	opacity: 1;
@@ -771,7 +738,6 @@ iframe{
 	.navbar-fixed-top ul.menu .user-detail a>div{
 		width: 420px;
 	}
-
 	.iso-container .iso-header .filters button{
 		padding: 14px 5px !important;
 	}
@@ -806,11 +772,9 @@ iframe{
 	.login-form .go-right::after{
 		display: none;
 	}
-
 	.login-form .list-inline{
 		margin-right: 0;
 	}
-
 	.login-form .go-left,
 	.login-form .go-right{
 		text-align: center;
@@ -831,26 +795,22 @@ iframe{
 	.left-toggle .left-menu-overlay{
 		display:none;
 	}
-
 	.left-toggle .main{
 		width:auto;
 	}
+
 	.main{
 		width:600px;
 	}
-
 	.navbar-fixed-top .dropdown-toggle{
 		padding: 29px 15px;
 	}
-
 	.navbar-fixed-top ul.menu{
 		right: 0;
 	}
-
 	.navbar-fixed-top ul.menu .user-detail{
 		padding-right: 5px;
 	}
-
 	.navbar-fixed-top .brand{
 		background-position: -12px center;
 		background-size: cover;
